@@ -1,7 +1,6 @@
-<html><body><script>
-// prefix incrementing and decrementing
 let temperature = 70;
 
+// prefix incrementing and decrementing
 console.log("returned:", ++temperature);
 // returned: 71
 console.log("temperature:", temperature);
@@ -17,9 +16,9 @@ console.log("returned:", --temperature);
 console.log("temperature:", temperature);
 // temperature: 71
 
-// postfix incrementing and decrementing
 temperature = 70;
 
+// postfix incrementing and decrementing
 console.log("returned:", temperature++);
 // returned: 70
 console.log("temperature:", temperature);
@@ -34,4 +33,3 @@ console.log("returned:", temperature--);
 // returned: 72
 console.log("temperature:", temperature);
 // temperature: 71
-</script></body></html>

@@ -1,4 +1,3 @@
-<html><body><script>
 let price = 20;
 
 price += 5;
@@ -8,4 +7,3 @@ console.log("price:", price);
 price -= 10;
 console.log("price:", price);
 // price: 15
-</script></body></html>

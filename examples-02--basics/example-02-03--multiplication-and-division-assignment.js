@@ -1,4 +1,3 @@
-<html><body><script>
 let value = 6;
 
 value *= 2;
@@ -8,4 +7,3 @@ console.log("value:", value);
 value /= 3;
 console.log("value:", value);
 // 4
-</script></body></html>
