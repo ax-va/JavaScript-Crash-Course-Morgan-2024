@@ -11,5 +11,5 @@ alphabet[0];
 alphabet[1];
 // 'B'
 
-alphabet[10];
+alphabet[10]; // exception in Python
 // undefined
