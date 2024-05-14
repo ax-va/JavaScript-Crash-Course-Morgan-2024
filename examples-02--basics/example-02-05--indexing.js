@@ -4,7 +4,7 @@ let alphabet = "ABCDEFG";
 alphabet;
 // 'ABCDEFG'
 
-// zero-based indexing
+// zero-based indexing (same in Python)
 alphabet[0];
 // 'A'
 

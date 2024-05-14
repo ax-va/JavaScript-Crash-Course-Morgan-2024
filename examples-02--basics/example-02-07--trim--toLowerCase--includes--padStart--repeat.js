@@ -1,28 +1,28 @@
-let inputText = "\t\t\t    Here is my input     ";
+let text = "\t\t\t    Here is my input     ";
 
-inputText.trim()
+text.trim() // in Python: text.strip()
 // 'Here is my input'
 
-inputText
+text
 // '\t\t\t    Here is my input     '
 
-inputText = "\n\t\n    Here is my input     ";
+text = "\n\t\n    Here is my input     ";
 
-inputText.trim();
+text.trim();
 // 'Here is my input'
 
-let text = "Hallo";
+text = "Hallo";
 
-text.toLowerCase();
+text.toLowerCase(); // in Python: text.lower()
 // 'hallo'
 
-text.includes("allo");
+text.includes("allo"); // in Python: "allo" in text
 // true
 
 text.padStart(10, "_");
 // '_____Hallo'
 
-text.repeat(3);
+text.repeat(3); // in Python: text * 3
 // 'HalloHalloHallo'
 
 text.repeat(0);
