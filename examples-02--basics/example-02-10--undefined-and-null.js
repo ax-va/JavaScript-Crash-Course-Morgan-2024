@@ -10,7 +10,7 @@ let value = 1;
 value += 1;
 // 2
 
-// Programmers generally use "null" to explicitly mark something as empty:
+// Use "null" to explicitly mark something as empty:
 let address = null;
 // undefined
 
