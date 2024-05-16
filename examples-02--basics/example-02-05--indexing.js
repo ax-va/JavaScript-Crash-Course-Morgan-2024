@@ -4,12 +4,12 @@ let alphabet = "ABCDEFG";
 alphabet;
 // 'ABCDEFG'
 
-// zero-based indexing (same in Python)
-alphabet[0];
+// zero-based indexing
+alphabet[0]; // same in Python
 // 'A'
 
-alphabet[1];
+alphabet[1]; // same in Python
 // 'B'
 
-alphabet[10];
+alphabet[10]; // exception in Python
 // undefined
