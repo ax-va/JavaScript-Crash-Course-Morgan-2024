@@ -4,4 +4,4 @@
 https://codepen.io/collection/ZMjYLO
 
 ## Open a file in the Chrome web browser:
-Ctrl+Shift+O
+`Ctrl+Shift+O`
