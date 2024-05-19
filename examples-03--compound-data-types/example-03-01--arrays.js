@@ -1,3 +1,5 @@
+/* An analog of the array in JavaScript is the list in Python. */
+
 let primes = [2, 3, 5, 7, 11, 13, 17, 19];
 primes;
 // ▶ (8) [2, 3, 5, 7, 11, 13, 17, 19]
@@ -34,29 +36,29 @@ let ticTacToe = [["", "", ""],
                  ["", "", ""],
                  ["", "", ""]];
 ticTacToe;
-// ▶ (3) [Array(3), Array(3), Array(3)]
-// ▶ 0: (3) ['', '', '']
-// ▶ 1: (3) ['', '', '']
-// ▶ 2: (3) ['', '', '']
-//   length: 3
-// ▶ [[Prototype]]: Array(0)
+// ▼ (3) [Array(3), Array(3), Array(3)]
+//    ▶ 0: (3) ['', '', '']
+//    ▶ 1: (3) ['', '', '']
+//    ▶ 2: (3) ['', '', '']
+//      length: 3
+//    ▶ [[Prototype]]: Array(0)
 
 ticTacToe[0][2] = "X";
 // 'X'
 ticTacToe;
-// ▶ (3) [Array(3), Array(3), Array(3)]
-// ▶ 0: (3) ['', '', 'X']
-// ▶ 1: (3) ['', '', '']
-// ▶ 2: (3) ['', '', '']
-//   length: 3
-// ▶ [[Prototype]]: Array(0)
+// ▼ (3) [Array(3), Array(3), Array(3)]
+//   ▶ 0: (3) ['', '', 'X']
+//   ▶ 1: (3) ['', '', '']
+//   ▶ 2: (3) ['', '', '']
+//     length: 3
+//   ▶ [[Prototype]]: Array(0)
 
 ticTacToe[2][0] = "O";
 // 'O'
 ticTacToe;
-// ▶ (3) [Array(3), Array(3), Array(3)]
-// ▶ 0: (3) ['', '', 'X']
-// ▶ 1: (3) ['', '', '']
-// ▶ 2: (3) ['O', '', '']
-//   length: 3
-// ▶ [[Prototype]]: Array(0)
+// ▼ (3) [Array(3), Array(3), Array(3)]
+//   ▶ 0: (3) ['', '', 'X']
+//   ▶ 1: (3) ['', '', '']
+//   ▶ 2: (3) ['O', '', '']
+//     length: 3
+//   ▶ [[Prototype]]: Array(0)
