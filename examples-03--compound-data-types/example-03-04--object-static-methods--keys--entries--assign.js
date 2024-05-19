@@ -1,7 +1,7 @@
 // Get array of all keys of object
 let cats = { "Kiki": "black and white", "Mei": "tabby", "Moona": "gray" };
 Object.keys(cats);
-// ▶ (3) ['Kiki', 'Mei', 'Moona']
+// ► (3) ['Kiki', 'Mei', 'Moona']
 
 // in Python: cats.keys()
 
@@ -24,12 +24,12 @@ let chromosomes = {
 };
 Object.entries(chromosomes);
 // ▼ (4) [Array(2), Array(2), Array(2), Array(2)]
-//   ▶ 0: (2) ['koala', 16]
-//   ▶ 1: (2) ['snail', 24]
-//   ▶ 2: (2) ['giraffe', 30]
-//   ▶ 3: (2) ['cat', 38]
+//   ► 0: (2) ['koala', 16]
+//   ► 1: (2) ['snail', 24]
+//   ► 2: (2) ['giraffe', 30]
+//   ► 3: (2) ['cat', 38]
 //     length: 4
-//   ▶ [[Prototype]]: Array(0)
+//   ► [[Prototype]]: Array(0)
 
 // in Python: chromosomes.items()
 
