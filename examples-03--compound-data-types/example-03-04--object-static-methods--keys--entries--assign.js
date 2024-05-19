@@ -46,5 +46,5 @@ book;
 // physical = { "pages": 208, "binding": "Hardcover" }
 // contents = { "genre": "Fiction", "subgenre": "Mystery" }
 // book = {**physical, **contents}
-// # or better
+// # or even better
 // book = physical | content
