@@ -2,7 +2,7 @@
 
 let primes = [2, 3, 5, 7, 11, 13, 17, 19];
 primes;
-// ► (8) [2, 3, 5, 7, 11, 13, 17, 19]
+// * (8) [2, 3, 5, 7, 11, 13, 17, 19]
 
 primes[0];
 // 2
@@ -29,36 +29,36 @@ primes[8] = 23; // in Python: exception; in order to append in Python: primes.ap
 // 23
 
 primes;
-// ► (9) [0, 3, 5, 7, 11, 13, 17, 19, 23]
+// * (9) [0, 3, 5, 7, 11, 13, 17, 19, 23]
 
 // multidimensional arrays
 let ticTacToe = [["", "", ""],
                  ["", "", ""],
                  ["", "", ""]];
 ticTacToe;
-// ▼ (3) [Array(3), Array(3), Array(3)]
-//    ► 0: (3) ['', '', '']
-//    ► 1: (3) ['', '', '']
-//    ► 2: (3) ['', '', '']
+// * (3) [Array(3), Array(3), Array(3)]
+//    * 0: (3) ['', '', '']
+//    * 1: (3) ['', '', '']
+//    * 2: (3) ['', '', '']
 //      length: 3
-//    ► [[Prototype]]: Array(0)
+//    * [[Prototype]]: Array(0)
 
 ticTacToe[0][2] = "X";
 // 'X'
 ticTacToe;
-// ▼ (3) [Array(3), Array(3), Array(3)]
-//   ► 0: (3) ['', '', 'X']
-//   ► 1: (3) ['', '', '']
-//   ► 2: (3) ['', '', '']
+// * (3) [Array(3), Array(3), Array(3)]
+//   * 0: (3) ['', '', 'X']
+//   * 1: (3) ['', '', '']
+//   * 2: (3) ['', '', '']
 //     length: 3
-//   ► [[Prototype]]: Array(0)
+//   * [[Prototype]]: Array(0)
 
 ticTacToe[2][0] = "O";
 // 'O'
 ticTacToe;
-// ▼ (3) [Array(3), Array(3), Array(3)]
-//   ► 0: (3) ['', '', 'X']
-//   ► 1: (3) ['', '', '']
-//   ► 2: (3) ['O', '', '']
+// * (3) [Array(3), Array(3), Array(3)]
+//   * 0: (3) ['', '', 'X']
+//   * 1: (3) ['', '', '']
+//   * 2: (3) ['O', '', '']
 //     length: 3
-//   ► [[Prototype]]: Array(0)
+//   * [[Prototype]]: Array(0)
