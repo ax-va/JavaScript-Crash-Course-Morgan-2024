@@ -31,6 +31,8 @@ Object.entries(chromosomes);
 //     length: 4
 //   * [[Prototype]]: Array(0)
 
+// The [[Prototype]] properties refer to the Object constructor.
+
 // in Python: chromosomes.items()
 
 // Combine objects
