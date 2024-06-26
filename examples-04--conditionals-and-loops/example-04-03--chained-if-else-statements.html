@@ -1,0 +1,27 @@
+<html><body><script>
+let speed = 20;
+console.log(`Your current speed is ${speed} mph.`);
+// Your current speed is 20 mph.
+
+if (speed > 25) {
+    console.log("Slow down!");
+} else if (speed > 15) {
+    console.log("You're driving at a good speed.");
+    // You're driving at a good speed.
+} else {
+    console.log("You're driving too slowly.");
+}
+
+if (speed > 25) {
+    console.log("Slow down!");
+} else if (speed > 20 && speed <= 25) {
+    console.log("You're driving at a good speed.");
+} else if (speed > 15 && speed <= 20) {
+    console.log("You're driving a little bit too slowly.");
+    // You're driving a little bit too slowly.
+} else if (speed > 10 && speed <= 15) {
+    console.log("You're driving too slowly.");
+} else {
+    console.log("You're driving far too slowly!");
+}
+</script></body></html>
