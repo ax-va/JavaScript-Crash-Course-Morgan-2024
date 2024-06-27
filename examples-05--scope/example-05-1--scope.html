@@ -1,0 +1,18 @@
+<html><body><script>
+/*
+An outer variable can be used in an inner scope.
+An inner variable cannot be used in an outer scope.
+*/
+
+let name = "Philadelphia";
+// The name variable can also be used in the "if" scope
+if (name.length > 10) {
+    let message = `Hi ${name}, you have a really long name!`;
+    // The message variable can be used only in this "if" scope
+    console.log(message);
+    // Hi Philadelphia, you have a really long name!
+}
+console.log(message);
+// Uncaught
+// ReferenceError: message is not defined
+</script></body></html>

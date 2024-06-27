@@ -1,0 +1,35 @@
+<html><body><script>
+let colors = ["Red", "Green", "Blue"];
+
+// new
+for (let color of colors) {
+    console.log(`${color} is a color.`);
+}
+// Red is a color.
+// Green is a color.
+// Blue is a color.
+
+// with indices
+for (let [index, item] of colors.entries()) {
+    console.log(`${index}: ${item} is a color.`);
+}
+// 0: Red is a color.
+// 1: Green is a color.
+// 2: Blue is a color.
+
+for (let letter of "Alex") {
+    console.log(letter);
+}
+// A
+// l
+// e
+// x
+
+// old
+for (let index = 0; index < colors.length; index++) {
+    console.log(`${colors[index]} is a color.`);
+}
+// Red is a color.
+// Green is a color.
+// Blue is a color.
+</script></body></html>

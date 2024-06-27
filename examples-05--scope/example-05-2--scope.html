@@ -1,0 +1,23 @@
+<html><body><script>
+/*
+An outer variable can be used in an inner scope.
+An inner variable cannot be used in an outer scope.
+*/
+
+for (let i = 0; i < 10; i++) {
+    console.log(`This is repetition ${i}`);
+}
+// This is repetition 0
+// This is repetition 1
+// This is repetition 2
+// This is repetition 3
+// This is repetition 4
+// This is repetition 5
+// This is repetition 6
+// This is repetition 7
+// This is repetition 8
+// This is repetition 9
+console.log(i);
+// Uncaught
+// ReferenceError: message is not defined
+</script></body></html>

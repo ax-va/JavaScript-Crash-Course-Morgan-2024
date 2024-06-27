@@ -1,0 +1,12 @@
+<html><body><script>
+for (let speed = 30; speed > 25; speed--) {
+    // The speed variable belongs to the scope of the loop,
+    // meaning code outside the loop doesn't have access to it.
+    console.log(`Your current speed is ${speed} mph.`);
+}
+// Your current speed is 30 mph.
+// Your current speed is 29 mph.
+// Your current speed is 28 mph.
+// Your current speed is 27 mph.
+// Your current speed is 26 mph.
+</script></body></html>

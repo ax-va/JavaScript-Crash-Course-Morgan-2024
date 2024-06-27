@@ -1,0 +1,22 @@
+<html><body><script>
+let me = {
+    "first name": "Alex",
+    "last name": "Vasiliev",
+    "age": null
+};
+
+for (let key in me) {
+    console.log(`My ${key} is ${me[key]}.`);
+}
+// My first name is Alex.
+// My last name is Vasiliev.
+// My age is null.
+
+// alternative
+for ([key, value] of Object.entries(me)) {
+   console.log(`My ${key} is ${value}.`);
+}
+// My first name is Alex.
+// My last name is Vasiliev.
+// My age is null.
+</script></body></html>
