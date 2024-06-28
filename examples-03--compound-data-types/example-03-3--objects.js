@@ -28,8 +28,8 @@ obj["key 3"];
 obj.key_2; // but not in Python: obj.key_2 is valid only if key_2 is an attribute of obj
 // 2
 
-obj."key 4";
-// exception: Uncaught SyntaxError: Unexpected string
+//obj."key 4";
+// // exception: Uncaught SyntaxError: Unexpected string
 
 obj.length;
 // undefined
@@ -49,4 +49,3 @@ dictionary.mouse = "A furry rodent";
 // 'A furry rodent'
 dictionary;
 // {mouse: 'A furry rodent', computer mouse: 'A pointing device for computers'}
-

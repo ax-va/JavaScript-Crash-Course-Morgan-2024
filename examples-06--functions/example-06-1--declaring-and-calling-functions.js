@@ -49,17 +49,17 @@ add(1, '1');
 /* side effect */
 
 let addCalls = 0;
-function add(x, y) {
+function add2(x, y) {
     addCalls++;
     console.log(`x was ${x} and y was ${y}.`);
     return x + y;
 }
 
-let sum = add(Math.PI, Math.E);
+let sum2 = add2(Math.PI, Math.E);
 // x was 3.141592653589793 and y was 2.718281828459045.
 // undefined
 
-sum;
+sum2();
 // 5.859874482048838
 
 addCalls;

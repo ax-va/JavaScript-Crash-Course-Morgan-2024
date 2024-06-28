@@ -1,7 +1,7 @@
 /*
 Function expressions (function literals) without names are also called anonymous functions.
 A function expression cannot be written at the start of a line of code.
-*/
+ */
 
 // Assign the function expression to the addExpression variable
 let addFuncExpr = function (x, y) {

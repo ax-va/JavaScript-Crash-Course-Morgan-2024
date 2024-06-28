@@ -1,5 +1,4 @@
 let penny = { name: "Penny", value: 1, weight: 2.5 };
-let nickel = { name: "Nickel", value: 5, weight: 5 };
 let dime = { name: "Dime", value: 10, weight: 2.268 };
 let quarter = { name: "Quarter", value: 25, weight: 5.67 };
 
