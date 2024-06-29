@@ -6,7 +6,7 @@ class Player {
     }
 
     // method without the function keyword
-    move(dx, dy) {
+    move(dx, dy) { // in Python: def move(self, dx, dy):
         this.x += dx;
         this.y += dy;
     }
