@@ -13,6 +13,15 @@ class Player {
 }
 
 let player1 = new Player(0, 0); // in Python: player1 = Player(0, 0)
+player1;
+// * Player {x: 0, y: 0}
+//      x: 0
+//      y: 0
+//    * [[Prototype]]: Object
+//      * constructor: class Player
+//      * move: ƒ move(dx, dy)
+//      * [[Prototype]]: Object
+
 player1.x;  // similar in Python: player1.x
 // 0
 player1.y;
