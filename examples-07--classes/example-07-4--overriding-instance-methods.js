@@ -19,7 +19,7 @@ Cat.prototype.sayHello = function () {
     console.log(`Miaow! My name is ${this.name}.`);
 };
 
-// Overwrite
+// Overwrite instances' methods
 
 let charlie = new Dog("Charlie");
 charlie.sayHello = function () {
