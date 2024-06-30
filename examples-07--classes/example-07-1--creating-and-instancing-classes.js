@@ -1,12 +1,16 @@
+/*
+The newer class system with class keyword is a *syntactic sugar* of the older one.
+ */
+
 class Player {
-    // method without the function keyword
+    // Add a method without the function keyword that is also a property
     constructor(startX, startY) { // in Python:  def __init__(self, start_x, start_y):
         // properties
         this.x = startX; // in Python: self.x = start_x
         this.y = startY;  // definition difference: property in JavaScript, attribute in Python
     }
 
-    // method without the function keyword
+    // Add a method without the function keyword that is also a property
     move(dx, dy) { // in Python: def move(self, dx, dy):
         this.x += dx;
         this.y += dy;
@@ -22,6 +26,10 @@ player1;
 //      * constructor: class Player
 //      * move: ƒ move(dx, dy)
 //      * [[Prototype]]: Object
+//        * constructor: ƒ Object()
+// ...
+
+// Notice: the constructor and move methods was automatically added to Player.prototype as its properties.
 
 player1.x;  // similar in Python: player1.x
 // 0

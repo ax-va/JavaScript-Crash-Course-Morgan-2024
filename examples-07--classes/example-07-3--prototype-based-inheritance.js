@@ -23,7 +23,9 @@ Cat.prototype.sayHello = function () {
 let kiki = new Cat("Kiki");
 kiki.sayHello();
 // Miaow! My name is Kiki.
+// undefined
 
+// prototype-based inheritance chain
 kiki;
 // * Cat {name: 'Kiki'}
 //      name: 'Kiki'
@@ -31,3 +33,32 @@ kiki;
 //      * sayHello: ƒ ()
 //      * constructor: f Cat(name)
 //      * [[Prototype]]: Object
+//        * constructor: ƒ Object()
+// ...
+
+// Notice: classes use the same prototype mechanism under the hood.
+
+// Access an object's [[Prototype]] property, here Cat.prototype, directly in code
+kiki.__proto__;
+// * {sayHello: ƒ}
+//   * sayHello: ƒ ()
+//   * constructor: ƒ Cat(name)
+//   * [[Prototype]]: Object
+
+let alex = {name: "Alex", age: null};
+alex;
+// * {name: 'Alex', age: null}
+//      name: 'Alex'
+//    * [[Prototype]]: Object
+//      * constructor: ƒ Object()
+// ...
+
+/* walking the prototype chain */
+
+kiki.name;
+// 'Kiki'
+kiki.sayHello();
+// Miaow! My name is Kiki.
+// undefined
+kiki.hasOwnProperty("name");
+// true

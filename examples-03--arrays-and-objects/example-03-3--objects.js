@@ -1,16 +1,19 @@
-/* An analog of the object in JavaScript is the dictionary in Python. */
+/* An analog of the object in JavaScript might be the dictionary in Python. */
 
+// Create object (in fact, implicitly using the Object's constructor).
 let casablanca = {
     "title": "Casablanca",
     "released": 1942,
     "director": "Michael Curtiz",
 };
 casablanca;
-// title: 'Casablanca', released: 1942, director: 'Michael Curtiz'}
+// {title: 'Casablanca', released: 1942, director: 'Michael Curtiz'}
+// ...
 
 // The valid identifiers as keys here are key1, key_2, key$3. The other keys are in quotes.
 let obj = { key1: 1, key_2: 2, key$3: 3, "key 4": 4, "key#5": 5 };
 // {key1: 1, key_2: 2, key$3: 3, key 4: 4, key#5: 5}
+// ...
 
 obj[key1];
 // exception: Uncaught ReferenceError: key1 is not defined
