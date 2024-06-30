@@ -1,6 +1,7 @@
 class Player {
     // method without the function keyword
     constructor(startX, startY) { // in Python:  def __init__(self, start_x, start_y):
+        // properties
         this.x = startX; // in Python: self.x = start_x
         this.y = startY;  // definition difference: property in JavaScript, attribute in Python
     }
