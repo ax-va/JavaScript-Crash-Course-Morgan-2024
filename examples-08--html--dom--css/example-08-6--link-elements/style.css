@@ -1,0 +1,34 @@
+/* h1 is a selector that matches all h1 elements */
+h1 /* selector */ {
+    /* declarations */
+    /* <property name> <colon> <property value> <semicolon> */
+    color: red;
+    font-style: italic;
+}
+
+/* ID selector */
+#main-heading {
+    font-size: 48px; /* in pixels */
+}
+
+/* Select any strong element */
+strong {
+    color: blue;
+}
+
+/* descendant selector */
+/* Select any strong element that is a descendant of a p element */
+p strong {
+    font-size: 24px;
+}
+
+/* class selector */
+/* .highlight will match any element with class="highlight" */
+.highlight {
+    background-color: yellow;
+}
+
+/* Select any strong element that is a descendant of an element with the highlight class. */
+.highlight strong {
+    background-color: orange;
+}
