@@ -1,4 +1,4 @@
-// Open the previous page in Chrome and run in the Chrome console
+// Open the previous page in Chrome and run code in the Chrome console
 document.title;
 // Hello, World!'
 
