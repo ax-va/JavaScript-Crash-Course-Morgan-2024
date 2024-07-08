@@ -16,5 +16,5 @@ strong[0].textContent;
 document.querySelector returns only the first element matching the selector, or null if no elements match
  */
 
-document.querySelector("#main-heading strong").textContent
+document.querySelector("#main-heading strong").textContent;
 // 'JavaScript'
