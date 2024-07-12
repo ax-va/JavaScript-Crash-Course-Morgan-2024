@@ -1,0 +1,15 @@
+li {
+    /*
+    Change the cursor from the default arrow to
+    a hand with a finger when it is over an li element.
+     */
+    cursor: pointer;
+}
+
+/*
+Use the :hover pseudo-class: li:hover matches any li element
+that the mouse is currently hovering over.
+ */
+li:hover {
+    text-decoration: underline;
+}
