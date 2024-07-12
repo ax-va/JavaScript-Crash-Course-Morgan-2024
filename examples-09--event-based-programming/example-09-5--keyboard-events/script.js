@@ -30,4 +30,3 @@ document
     });
 // Notice that holding the key down results in the box continuing to move,
 // as the keyboard sends repeated keydown events.
-
