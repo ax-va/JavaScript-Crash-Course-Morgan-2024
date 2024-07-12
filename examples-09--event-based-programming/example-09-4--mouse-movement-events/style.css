@@ -1,0 +1,9 @@
+#box {
+    /* at the very top-left corner of the browser viewport */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    background-color: hotpink;
+}
