@@ -1,6 +1,6 @@
 #box {
     /* at the very top-left corner of the browser viewport */
-    position: fixed;
+    position: fixed; /* fixed position in the browser window determined by the properties below */
     left: 0;
     top: 0;
     width: 10px;
