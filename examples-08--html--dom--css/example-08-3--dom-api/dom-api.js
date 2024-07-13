@@ -8,18 +8,18 @@ document.title = "Hello, JavaScript!";
 // That is just a change to the DOM, the browser’s model of the web page,
 // not the underlying HTML file itself that disappear by refreshing.
 
-let heading = document.getElementById("main-heading");
+let mainHeading = document.getElementById("main-heading");
 // undefined
 
 // Browsers will usually return the first element with that ID
 
-heading;
+mainHeading;
 // <h1 id="main-heading">Hello!</h1>
 
 // That is not text, but a text representation of HTMLElement
 
-heading.innerText;
+mainHeading.innerText;
 // 'Hello!'
 
-heading.innerText = "Hi there...";
+mainHeading.innerText = "Hi there...";
 // 'Hi there...'
