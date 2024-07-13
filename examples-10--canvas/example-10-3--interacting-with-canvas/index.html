@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Canvas</title>
+    </head>
+    <body>
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <!--
+        Locate elements grouped by div below the canvas element:
+        without the div they'd appear to the right of the canvas.
+        -->
+        <div id="sliders">
+            <div>
+                <!--
+                The input element doesn't allow any child elements, so it doesn't need a closing tag.
+                type="range" determines a slider.
+                -->
+                <input id="red-channel" type="range" min="0" max="255" value="127" step="1">
+                <label for="red-channel">Red Channel</label>
+            </div>
+            <div>
+                <input id="green-channel" type="range" min="0" max="255" value="127" step="1">
+                <label for="green-channel">Green Channel</label>
+            </div>
+            <div>
+                <input id="blue-channel" type="range" min="0" max="255" value="127" step="1">
+                <label for="blue-channel">Blue Channel</label>
+            </div>
+            <div>
+                <input id="alpha-channel" type="range" min="0" max="1" value="1" step="0.1">
+                <label for="alpha-channel">Alpha Channel</label>
+            </div>
+            <div>
+                <input id="radius" type="range" min="10" max="50" value="30" step="1">
+                <label for="radius">Radius</label>
+            </div>
+        </div>
+        <div id="buttons">
+            <button id="clear">Clear</button>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
