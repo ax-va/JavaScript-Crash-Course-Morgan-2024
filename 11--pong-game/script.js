@@ -51,11 +51,11 @@ function adjustAngle(distanceFromLeft, distanceFromRight) {
     // from the right of the paddle to the right of the ball, respectively.
     if (distanceFromLeft < 0) {
         ballPositionOffset.x -= 0.5;
-        console.log("Left hit!");
+        console.log("Left-edge hit!");
         console.log("ballPositionOffset.x", ballPositionOffset.x);
     } else if (distanceFromRight < 0) {
         ballPositionOffset.x += 0.5;
-        console.log("Right hit!");
+        console.log("Right-edge hit!");
         console.log("ballPositionOffset.x", ballPositionOffset.x);
     };
 }
