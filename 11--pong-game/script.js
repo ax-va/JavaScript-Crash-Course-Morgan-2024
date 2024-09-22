@@ -52,10 +52,12 @@ function adjustAngle(distanceFromLeft, distanceFromRight) {
     if (distanceFromLeft < 0) {
         ballPositionOffset.x -= 0.5;
         console.log("Left-edge hit!");
+        console.log(`Distance from left: ${distanceFromLeft}`);
         console.log("ballPositionOffset.x", ballPositionOffset.x);
     } else if (distanceFromRight < 0) {
         ballPositionOffset.x += 0.5;
         console.log("Right-edge hit!");
+        console.log(`Distance from right: ${distanceFromRight}`);
         console.log("ballPositionOffset.x", ballPositionOffset.x);
     };
 }
@@ -63,10 +65,10 @@ function adjustAngle(distanceFromLeft, distanceFromRight) {
 function handleCollisions() {
     // Handle if the ball has collided with one of the four walls of the canvas
     let ball = {
-        left: Math.round(ballPosition.x - BALL_SIZE / 2),
-        right: Math.round(ballPosition.x + BALL_SIZE / 2),
-        top: Math.round(ballPosition.y - BALL_SIZE / 2),
-        bottom: Math.round(ballPosition.y + BALL_SIZE / 2),
+        left: ballPosition.x,
+        right: ballPosition.x + BALL_SIZE,
+        top: ballPosition.y,
+        bottom: ballPosition.y + BALL_SIZE,
     }
     if (ball.left < 0 || ball.right > width) {
         ballPositionOffset.x = -ballPositionOffset.x;
