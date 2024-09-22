@@ -38,7 +38,7 @@ function update() {
     ballPosition.y += ballPositionOffset.y;
 }
 
-function arePaddleAndBallCollided(ball, paddle) {
+function areBallAndPaddleCollided(ball, paddle) {
     // Return `true` if overlapped
     return (
         (ball.left < paddle.right && ball.right > paddle.left) &&
@@ -90,7 +90,7 @@ function handleCollisions() {
         top: height - PADDLE_OFFSET - PADDLE_HEIGHT,
         bottom: height - PADDLE_OFFSET,
     };
-    if (arePaddleAndBallCollided(ball, topPaddle)) {
+    if (areBallAndPaddleCollided(ball, topPaddle)) {
         // Top paddle collision happened.
         let distanceFromLeft = ball.left - topPaddle.left;
         let distanceFromRight = topPaddle.right - ball.right;
@@ -99,7 +99,7 @@ function handleCollisions() {
         // send the ball bouncing back and forth "inside" the paddle.
         ballPositionOffset.y = Math.abs(ballPositionOffset.y);
     };
-    if (arePaddleAndBallCollided(ball, bottomPaddle)) {
+    if (areBallAndPaddleCollided(ball, bottomPaddle)) {
         // Bottom paddle collision happened.
         let distanceFromLeft = ball.left - bottomPaddle.left;
         let distanceFromRight = bottomPaddle.right - ball.right;
