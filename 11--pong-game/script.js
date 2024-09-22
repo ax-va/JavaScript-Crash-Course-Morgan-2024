@@ -7,7 +7,7 @@ const BALL_SIZE = 5;
 let ballPosition = {x: 20, y: 30};
 let ballPositionOffset = {x: 2, y: 4};
 
-// Add the paddles
+// Add the top and bottom paddles
 const PADDLE_WIDTH = 40;
 const PADDLE_HEIGHT = 5;
 const PADDLE_OFFSET = 20;
