@@ -1,0 +1,9 @@
+The game loop:
+
+1. Clear canvas
+2. Draw image
+3. Get player input
+4. Update state
+5. Handle collisions (check for when objects in the game meet and respond accordingly)
+6. Wait a short time
+7. Repeat
