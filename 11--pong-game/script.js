@@ -47,8 +47,8 @@ function arePaddleAndBallCollided(ball, paddle) {
 }
 
 function adjustAngle(distanceFromLeft, distanceFromRight) {
-    // Take into account the distance from the left of the ball to the left of the paddle and
-    // from the right of the paddle to the right of the ball, respectively.
+    // Use the distance from the left of the ball to the left of the paddle and
+    // from the right of the paddle to the right of the ball to change `ballPositionOffset.x`.
     if (distanceFromLeft < 0) {
         ballPositionOffset.x -= 0.5;
         console.log("Left-edge hit!");
