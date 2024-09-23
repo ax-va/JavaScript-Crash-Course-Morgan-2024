@@ -110,7 +110,7 @@ function handleCollisions() {
     };
 }
 
-function loop() {
+function loopPongGame() {
     draw();
     update();
     handleCollisions();
@@ -120,4 +120,4 @@ function loop() {
     // while `setInterval` calls its function repeatedly.
 }
 
-loop()
+loopPongGame()
