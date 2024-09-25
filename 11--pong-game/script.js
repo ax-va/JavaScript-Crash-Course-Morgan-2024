@@ -2,10 +2,10 @@ let canvas = document.querySelector("#canvas");
 let ctx = canvas.getContext("2d");
 let width = canvas.width, height = canvas.height;
 
-// Add the ball
+// Add the ball parameters
 const BALL_SIZE = 5;
-let ballPosition = {x: 20, y: 30};
-let ballPositionOffset = {x: 2, y: 4};
+let ballPosition;
+let ballPositionOffset;
 
 // Add the top and bottom paddles
 const PADDLE_WIDTH = 40;
@@ -14,10 +14,19 @@ const PADDLE_OFFSET = 20;
 let topPaddlePosition = 50;
 let bottomPaddlePosition = 70;
 
+// Add scoring points
+let topPaddleScore = 0;
+let bottomPaddleScore = 0;
+
 // Move the bottom paddle with the mouse
 document.addEventListener("mousemove", (e) => {
     bottomPaddlePosition = e.x - canvas.offsetLeft;
 });
+
+function initBallPosition() {
+    ballPosition = {x: 20, y: 30};
+    ballPositionOffset = {x: 2, y: 4};
+}
 
 function draw() {
     // Fill the canvas with black
@@ -31,6 +40,14 @@ function draw() {
     ctx.fillRect(topPaddlePosition, PADDLE_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
     // Draw the bottom paddle
     ctx.fillRect(bottomPaddlePosition, height - PADDLE_HEIGHT - PADDLE_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
+    // Draw scoring points
+    ctx.font = "16px monospace";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText(topPaddleScore.toString(), 0, 0);
+    ctx.textAlign = "right";
+    ctx.textBaseline = "bottom";
+    ctx.fillText(bottomPaddleScore.toString(), width, height)
 }
 
 function update() {
@@ -115,9 +132,10 @@ function loopPongGame() {
     update();
     handleCollisions();
     // Call this function again after a timeout in ms
-    setTimeout(loop, 30);
+    setTimeout(loopPongGame, 30);
     // Recall that `setTimeout` calls its function only once after the timeout,
     // while `setInterval` calls its function repeatedly.
 }
 
-loopPongGame()
+initBallPosition();
+loopPongGame();
