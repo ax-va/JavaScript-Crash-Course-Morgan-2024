@@ -41,10 +41,12 @@ function draw() {
     // Draw the bottom paddle
     ctx.fillRect(bottomPaddlePosition, height - PADDLE_HEIGHT - PADDLE_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
     // Draw scoring points
+    ctx.fillStyle = "red";
     ctx.font = "16px monospace";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
     ctx.fillText(topPaddleScore.toString(), 0, 0);
+    ctx.fillStyle = "green";
     ctx.textAlign = "right";
     ctx.textBaseline = "bottom";
     ctx.fillText(bottomPaddleScore.toString(), width, height)
