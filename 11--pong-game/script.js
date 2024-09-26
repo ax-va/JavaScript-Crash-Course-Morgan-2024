@@ -82,21 +82,12 @@ function adjustAngle(distanceFromLeft, distanceFromRight) {
 }
 
 function handleCollisions() {
-    // Handle if the ball has collided with one of the four walls of the canvas
     let ball = {
         left: ballPosition.x,
         right: ballPosition.x + BALL_SIZE,
         top: ballPosition.y,
         bottom: ballPosition.y + BALL_SIZE,
-    }
-    if (ball.left < 0 || ball.right > width) {
-        ballPositionOffset.x = -ballPositionOffset.x;
-        console.log("ballPositionOffset.x", ballPositionOffset.x);
-    }
-    if (ball.top < 0 || ball.bottom > height) {
-        ballPositionOffset.y = -ballPositionOffset.y;
-    }
-    // Handle if the paddle and the ball have collided
+    };
     let topPaddle = {
         left: topPaddlePosition,
         right: topPaddlePosition + PADDLE_WIDTH,
@@ -109,6 +100,19 @@ function handleCollisions() {
         top: height - PADDLE_OFFSET - PADDLE_HEIGHT,
         bottom: height - PADDLE_OFFSET,
     };
+    // Handle if the ball has collided with one of the four walls of the canvas
+    if (ball.left < 0 || ball.right > width) {
+        ballPositionOffset.x = -ballPositionOffset.x;
+    }
+    if (ball.top < 0) {
+        initBallPosition();
+        bottomPaddleScore++;
+    }
+    if (ball.bottom > height) {
+        initBallPosition();
+        topPaddleScore++;
+    }
+    // Handle if the paddle and the ball have collided
     if (areBallAndPaddleCollided(ball, topPaddle)) {
         // Top paddle collision happened.
         let distanceFromLeft = ball.left - topPaddle.left;
