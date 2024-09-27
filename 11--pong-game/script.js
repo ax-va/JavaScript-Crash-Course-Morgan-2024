@@ -2,6 +2,8 @@ let canvas = document.querySelector("#canvas");
 let ctx = canvas.getContext("2d");
 let width = canvas.width, height = canvas.height;
 
+const MAX_COMPUTER_SPEED = 2;
+
 // Add the ball parameters
 const BALL_SIZE = 5;
 let ballPosition;
@@ -17,6 +19,8 @@ let bottomPaddlePosition = 70;
 // Add scoring points
 let topPaddleScore = 0;
 let bottomPaddleScore = 0;
+// To continue the game
+let gameOver = false;
 
 // Move the bottom paddle with the mouse
 document.addEventListener("mousemove", (e) => {
@@ -41,20 +45,35 @@ function draw() {
     // Draw the bottom paddle
     ctx.fillRect(bottomPaddlePosition, height - PADDLE_HEIGHT - PADDLE_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
     // Draw scoring points
-    ctx.fillStyle = "red";
     ctx.font = "16px monospace";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
     ctx.fillText(topPaddleScore.toString(), 0, 0);
-    ctx.fillStyle = "green";
     ctx.textAlign = "right";
     ctx.textBaseline = "bottom";
     ctx.fillText(bottomPaddleScore.toString(), width, height)
 }
 
+function followBall() {
+    let ball = {
+        left: ballPosition.x,
+        right: ballPosition.x + BALL_SIZE,
+    };
+    let topPaddle = {
+        left: topPaddlePosition,
+        right: topPaddlePosition + PADDLE_WIDTH,
+    };
+    if (ball.left < topPaddle.left) {
+        topPaddlePosition -= MAX_COMPUTER_SPEED;
+    } else if (ball.right > topPaddle.right) {
+        topPaddlePosition += MAX_COMPUTER_SPEED;
+    }
+}
+
 function update() {
     ballPosition.x += ballPositionOffset.x;
     ballPosition.y += ballPositionOffset.y;
+    followBall();
 }
 
 function areBallAndPaddleCollided(ball, paddle) {
@@ -78,10 +97,10 @@ function adjustAngle(distanceFromLeft, distanceFromRight) {
         console.log("Right-edge hit!");
         console.log(`Distance from right: ${distanceFromRight}`);
         console.log("ballPositionOffset.x", ballPositionOffset.x);
-    };
+    }
 }
 
-function handleCollisions() {
+function controlGame() {
     let ball = {
         left: ballPosition.x,
         right: ballPosition.x + BALL_SIZE,
@@ -107,10 +126,13 @@ function handleCollisions() {
     if (ball.top < 0) {
         initBallPosition();
         bottomPaddleScore++;
-    }
-    if (ball.bottom > height) {
+    } else if (ball.bottom > height) {
         initBallPosition();
         topPaddleScore++;
+    }
+    // Check to stop the game
+    if (topPaddleScore > 9 || bottomPaddleScore > 9) {
+        gameOver = true;
     }
     // Handle if the paddle and the ball have collided
     if (areBallAndPaddleCollided(ball, topPaddle)) {
@@ -121,7 +143,7 @@ function handleCollisions() {
         // Using the absolute to avoid multiple collisions that could
         // send the ball bouncing back and forth "inside" the paddle.
         ballPositionOffset.y = Math.abs(ballPositionOffset.y);
-    };
+    }
     if (areBallAndPaddleCollided(ball, bottomPaddle)) {
         // Bottom paddle collision happened.
         let distanceFromLeft = ball.left - bottomPaddle.left;
@@ -130,18 +152,32 @@ function handleCollisions() {
         // Using the absolute to avoid multiple collisions that could
         // send the ball bouncing back and forth "inside" the paddle.
         ballPositionOffset.y = -Math.abs(ballPositionOffset.y);
-    };
+    }
 }
 
-function loopPongGame() {
+function drawGameOver() {
+    ctx.fillStyle = "white";
+    ctx.font = "30px monospace";
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "center";
+    ctx.fillText("GAME OVER", width / 2, height / 2);
+}
+
+function loopGame() {
     draw();
     update();
-    handleCollisions();
-    // Call this function again after a timeout in ms
-    setTimeout(loopPongGame, 30);
-    // Recall that `setTimeout` calls its function only once after the timeout,
-    // while `setInterval` calls its function repeatedly.
+    controlGame();
+    if (gameOver) {
+        // To display the finale scores
+        draw();
+        drawGameOver();
+    } else {
+        // Call this function again after a timeout in ms
+        setTimeout(loopGame, 30);
+        // Recall that `setTimeout` calls its function only once after the timeout,
+        // while `setInterval` calls its function repeatedly.
+    }
 }
 
 initBallPosition();
-loopPongGame();
+loopGame();
