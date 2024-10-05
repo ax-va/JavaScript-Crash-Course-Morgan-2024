@@ -1,7 +1,7 @@
 /*
     Play the Pong game.
     Use the mouse to move the bottom paddle.
-    Hit the ball with the edges of the paddle to change the angle of the ball.
+    Hit the ball with the edges of the paddle to change the angle and speed of the ball.
     The play stops when a player reaches 10 points.
  */
 let canvas = document.querySelector("#canvas");

@@ -1,7 +1,7 @@
 /*
     Play the Pong game.
     Use the mouse to move the bottom paddle.
-    Hit the ball with the edges of the paddle to change the angle of the ball.
+    Hit the ball with the edges of the paddle to change the angle and speed of the ball.
     The play stops when a player reaches 10 points.
     Try playing yourself online https://vizhub.com/ax-va/966f246e8d2b45ccaf84a5adccafda33.
  */
