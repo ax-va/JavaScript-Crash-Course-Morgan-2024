@@ -25,7 +25,6 @@ class GameView {
         this.ctx.fillStyle = "black";
         this.ctx.fillRect(0, 0, this.width, this.height);
         // Draw entities such as the ball and two paddles
-        // (using *polymorphism* and *Liskov substitution principle*).
         entities.forEach(entity => entity.draw(this.ctx));
     }
 
