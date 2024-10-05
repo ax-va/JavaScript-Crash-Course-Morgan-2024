@@ -1,3 +1,10 @@
+/*
+Play the Pong game.
+Use the mouse to move the bottom paddle.
+Hit the ball with the edges of the paddle to change the angle of the ball.
+The play stops when a player reaches 10 points.
+ */
+
 class GameView {
     /*
         This class is responsible for the canvas, drawing context,

@@ -1,3 +1,9 @@
+/*
+Play the Pong game.
+Use the mouse to move the bottom paddle.
+Hit the ball with the edges of the paddle to change the angle of the ball.
+The play stops when a player reaches 10 points.
+ */
 let canvas = document.querySelector("#canvas");
 let ctx = canvas.getContext("2d");
 let width = canvas.width, height = canvas.height;
