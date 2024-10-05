@@ -2,7 +2,7 @@ let canvas = document.querySelector("#canvas");
 let ctx = canvas.getContext("2d");
 let width = canvas.width, height = canvas.height;
 
-const MAX_COMPUTER_SPEED = 2;
+const MAX_COMPUTER_OFFSET = 2;
 
 // Add the ball parameters
 const BALL_SIZE = 5;
@@ -33,7 +33,7 @@ function initBallPosition() {
 }
 
 function draw() {
-    // Fill the canvas with black
+    // Fill the canvas with black to clear it
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, width, height);
     // Everything else will be white
@@ -64,9 +64,9 @@ function followBall() {
         right: topPaddlePosition + PADDLE_WIDTH,
     };
     if (ball.left < topPaddle.left) {
-        topPaddlePosition -= MAX_COMPUTER_SPEED;
+        topPaddlePosition -= MAX_COMPUTER_OFFSET;
     } else if (ball.right > topPaddle.right) {
-        topPaddlePosition += MAX_COMPUTER_SPEED;
+        topPaddlePosition += MAX_COMPUTER_OFFSET;
     }
 }
 
@@ -158,8 +158,8 @@ function controlGame() {
 function drawGameOver() {
     ctx.fillStyle = "white";
     ctx.font = "30px monospace";
-    ctx.textBaseline = "middle";
     ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
     ctx.fillText("GAME OVER", width / 2, height / 2);
 }
 
