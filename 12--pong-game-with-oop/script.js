@@ -9,7 +9,7 @@
 class GameView {
     /*
         This class is responsible for the canvas, drawing context,
-        drawing entities (e.g., the ball and two paddles) to the canvas,
+        drawing entities (the ball and two paddles) to the canvas,
         and drawing the "GAME OVER" text, i.e. how the game is displayed.
      */
     constructor() {
