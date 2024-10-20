@@ -10,7 +10,7 @@ playButton.addEventListener("click", () => {
     // Trigger the Tone.js library to start inside the click handler
     Tone.start();
 
-    // Tone.Synth (synthesizer) constructor
+    // monophonic synth
     let synth = new Tone.Synth({
         // Use the square oscillator
         oscillator: {type: "square"},
