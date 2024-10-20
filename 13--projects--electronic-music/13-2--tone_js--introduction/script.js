@@ -52,7 +52,7 @@ playButton.addEventListener("click", () => {
     // Connect the output of the synth to the audio context's output
     }).toDestination();
 
-    // Play a single note "A4" (equivalent to 440 Hz) two seconds, starting immediately
+    // Play a single note "A4" (equivalent to 440 Hz) two seconds (without release), starting immediately
     synth.triggerAttackRelease("A4", 2, 0);
     // Hear the same sound as in the previous example with Web Audio API
 
