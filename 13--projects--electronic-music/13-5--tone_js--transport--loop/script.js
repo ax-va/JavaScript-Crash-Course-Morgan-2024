@@ -24,6 +24,7 @@ playButton.addEventListener("click", () => {
     let synth = new Tone.Synth().toDestination();
 
     /*
+
     let loop = new Tone.Loop(
         // function to repeat filling `time` in with the appropriate location on the transport
         (time) => {
@@ -37,6 +38,7 @@ playButton.addEventListener("click", () => {
     // "*one* two three four, *two* two three four, *three* two three four, *four* two three four".
     loop.start("0:0:0");
     loop.stop("4:0:0"); // The end of the loop isn'`t inclusive. -> It will not be played.
+
     */
 
     // same but chained
