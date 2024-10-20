@@ -31,6 +31,6 @@ playButton.addEventListener("click", () => {
 
     // Start signal playing immediately
     oscNode.start(audioCtx.currentTime);
-    // Stop signal playing five seconds after it started
-    oscNode.stop(audioCtx.currentTime + 5);
+    // Stop signal playing two seconds after it started
+    oscNode.stop(audioCtx.currentTime + 2);
 });
