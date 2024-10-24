@@ -15,7 +15,7 @@ This lets us attach a single event handler, rather than using a separate handler
 
 **PEMDAS = parentheses, exponents, multiplication, division, addition, subtraction (the order of operations)**
 
-**Prototype-Based Inheritance = an older system than classes in JavaScript that still is used.**
+**Prototype-Based Inheritance = an older system than classes in JavaScript that still is used**
 
 That consists of 
 1) a constructor function (a regular, standalone function) 
