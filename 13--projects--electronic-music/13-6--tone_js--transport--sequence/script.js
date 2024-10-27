@@ -1,4 +1,6 @@
 /*
+Short explanation of music representation:
+
 A *bar* commonly consists of 4 *beats* (also known also *quarter notes*).
 
 *8th notes* are half the duration of a quarter note, and
@@ -7,6 +9,10 @@ so there are four 16th notes per quarter note.
 
 In Tone.js, *beats per minute* (BPM) = 120, i.e. a beat every 0.5 seconds,
 and the "<current_bar>:<current_beat_within_bar>:<16th_note_within_beat>" notation is used.
+
+Consider in this example a transport helper: `Tone.Sequence`.
+It helps provide a list of note names to be scheduled to play at regular intervals.
+Those sequence can be repeated many times.
  */
 let playButton = document.querySelector("#play");
 let playingParagraph = document.querySelector("#playing");
@@ -20,10 +26,6 @@ playButton.addEventListener("click", () => {
     // Trigger the Tone.js library to start inside the click handler
     Tone.start();
     Tone.Transport.start();
-
-    // `Tone.Sequence` helps provide a list of note names
-    // to be scheduled to play at regular intervals.
-    // Those sequence can be repeated many times.
 
     let synth = new Tone.Synth().toDestination();
 
