@@ -26,8 +26,9 @@ playButton.addEventListener("click", () => {
     /*
 
     let loop = new Tone.Loop(
-        // function to repeat filling `time` in with the appropriate location on the transport
-        (time) => {
+        // The Web Audio API's clock is not the same as the JavaScript clock and is preciser.
+        // See also: https://web.dev/audio-scheduling/
+        (time) => { // function to repeat filling `time` in with the appropriate location on the transport
             // Play the note C4 with a 16th note duration
             synth.triggerAttackRelease("C4", "16n", time);
         },
@@ -47,4 +48,34 @@ playButton.addEventListener("click", () => {
     }, "4n").start("0:0:0").stop("4:0:0");
 
     Tone.Transport.start();
+
+    // Play a new random note each time:
+    // by randomly playing notes from a pentatonic, or five-note, scale.
+    let synth2 = new Tone.PolySynth( // to play multiple notes at once
+        Tone.Synth,
+        {
+            oscillator: { type: "triangle" },
+            volume: -9 // dB
+        }
+    ).toDestination();
+
+    // octaves of a C major pentatonic scale, including the C from the next octave
+    let notes = ["C4", "D4", "E4", "G4", "A4", "C5"];
+
+    new Tone.Loop((time) => { // callback
+        // Run three times in the loop
+        for (let i = 0; i < 3; i++) {
+            // Determine whether to play a note or not
+            if (Math.random() < 0.5) {
+                // `Math.floor()` rounds a number down to the nearest integer.
+                // `Math.random()` generates a random floating-point number between 0 (inclusive) and 1 (exclusive).
+                let note = notes[Math.floor(Math.random() * notes.length)];
+                synth2.triggerAttackRelease(note, "32n", time);
+            }
+        }
+    // The Tone.Loop object calls this code every eighth note ("8n") for eight bars ("4:0:0" to "12:0:0")
+    }, "8n").start("4:0:0").stop("12:0:0");
+    // Every eighth note, up to three notes from the array, will be played
+    // (there's no guarantee of uniqueness, so the same note could be played two or
+    // three times at once, causing that note to be louder).
 });

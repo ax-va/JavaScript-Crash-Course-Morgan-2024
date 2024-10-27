@@ -32,7 +32,7 @@ playButton.addEventListener("click", () => {
                 // doesn't overlap with the start of the next one.
             },
             // Sets the overall volume of the synthesizer in decibels (dB)
-            volume: -6 // -6 dB to match the gain of 0.5
+            volume: -6 // -6 dB matches the gain of 0.5
         }
     ).toDestination();
 
