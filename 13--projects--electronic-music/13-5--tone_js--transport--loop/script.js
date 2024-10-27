@@ -19,6 +19,7 @@ playButton.addEventListener("click", () => {
 
     // Trigger the Tone.js library to start inside the click handler
     Tone.start();
+    Tone.Transport.start();
 
     // Create a simple synth with default settings
     let synth = new Tone.Synth().toDestination();
@@ -46,8 +47,6 @@ playButton.addEventListener("click", () => {
     new Tone.Loop((time) => {
         synth.triggerAttackRelease("C4", "16n", time);
     }, "4n").start("0:0:0").stop("4:0:0");
-
-    Tone.Transport.start();
 
     // Play a new random note each time:
     // by randomly playing notes from a pentatonic, or five-note, scale.
