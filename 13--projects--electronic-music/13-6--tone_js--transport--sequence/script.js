@@ -21,7 +21,6 @@ playButton.addEventListener("click", () => {
     Tone.start();
     Tone.Transport.start();
 
-
     // `Tone.Sequence` helps provide a list of note names
     // to be scheduled to play at regular intervals.
     // Those sequence can be repeated many times.
