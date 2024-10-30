@@ -33,4 +33,5 @@ playButton.addEventListener("click", () => {
     new Tone.Loop((time) => {
         hiHat.triggerAttackRelease("16n", time);
     }, "8n").start("0:0:0").stop("4:0:0");
+    // -> the hi-hat every eighth note
 });
