@@ -14,7 +14,7 @@ Re-uploaded samples used in this example:
 - https://skilldrick-jscc.s3.us-west-2.amazonaws.com/trumpet-d5.mp3
 - https://skilldrick-jscc.s3.us-west-2.amazonaws.com/trumpet-f5.mp3
 
-The samples were re-saved in this repo.
+The samples were re-uploaded into this repo.
 
 *Reverb* (short for *reverberation*) is an effect that makes
 music sound like it's being played in a room or larger enclosed space.
