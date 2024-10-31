@@ -29,9 +29,7 @@ playButton.addEventListener("click", () => {
 
     // Trigger the Tone.js library to start inside the click handler
     Tone.start();
-    // Set tempo for a stable beat.
-    Tone.Transport.bpm.value = 120;
-    Tone.Transport.start(0);
+    Tone.Transport.start();
 
     // Converts a string to an array of notes or null.
     // Dots in the string become nulls in the array and are silent.
