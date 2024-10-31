@@ -7,7 +7,7 @@ The core of a drum beat is built around three components:
 - the snare drum (a "bah" sound), and
 - the hi-hat (a "ti" sound).
 
-A helper function is demonstrated that handles drum patterns:
+A helper function handles drum patterns of the form:
 ```
 {
     kick: "x...x...",
