@@ -22,7 +22,7 @@ playButton.addEventListener("click", () => {
 
     let reverb = new Tone.Reverb({
         // How long (in seconds) the reverberation will continue after the sound stops
-        decay: 1, // The higher this number, the more echoey the effect
+        decay: 1, // The higher this number, the more echoed the effect
         // How much of the reverb sound is passed through compared with the original sound
         wet: 0.6 // 60 percent reverb and 40 percent the original sound
     }).toDestination();
