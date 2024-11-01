@@ -19,7 +19,7 @@ Four logical sections of the code:
 function mkDrums() {
     let reverb = new Tone.Reverb({
         decay: 1, // The higher this number, the more echoed the effect
-        wet: 0.3 // 30 percent reverb and 40 percent the original sound
+        wet: 0.3 // 30 percent reverb and 70 percent the original sound
     }).toDestination();
 
     let hiHatFilter = new Tone.Filter(15000, "bandpass").connect(reverb);
