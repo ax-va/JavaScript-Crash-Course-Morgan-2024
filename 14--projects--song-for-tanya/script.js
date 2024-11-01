@@ -235,10 +235,10 @@ snareToneSequence.start("0:0:0").stop("44:0:0");
 kickToneSequence.start("0:0:0").stop("44:0:0");
 
 // The bass solo continues for a few bars after the drums stop.
-lowBassToneSequence.start("0:0:0").stop("47:3:0");
-highBassToneSequence.start("4:0:0").stop("47:3:0");
+lowBassToneSequence.start("4:0:0").stop("48:0:0");
+highBassToneSequence.start("8:0:0").stop("48:0:0");
 
-chordSequence1.start("8:0:0").stop("24:0:0");
+chordSequence1.start("12:0:0").stop("24:0:0");
 chordSequence2.start("24:0:0").stop("32:0:0");
 chordSequence1.start("32:0:0").stop("40:0:0");
 
