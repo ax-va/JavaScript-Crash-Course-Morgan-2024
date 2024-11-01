@@ -234,7 +234,7 @@ hiHatToneSequence.start("0:0:0").stop("44:0:0");
 snareToneSequence.start("0:0:0").stop("44:0:0");
 kickToneSequence.start("0:0:0").stop("44:0:0");
 
-// The bass solo continues for a few bars after the drums stop.
+// The bass solo continues for a few bars after the drums stop
 lowBassToneSequence.start("4:0:0").stop("48:0:0");
 highBassToneSequence.start("8:0:0").stop("48:0:0");
 
