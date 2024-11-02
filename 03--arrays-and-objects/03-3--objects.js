@@ -52,3 +52,7 @@ dictionary.mouse = "A furry rodent";
 // 'A furry rodent'
 dictionary;
 // {mouse: 'A furry rodent', computer mouse: 'A pointing device for computers'}
+
+// *object literal shorthand syntax*
+// shorthand = {obj1, obj2, obj3, obj4}; // same as `{obj1: obj1, obj2: obj2, obj3: obj3, obj4: obj4}`
+// Notice: this does not work for numbers and strings
