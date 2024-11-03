@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SVG</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <svg width="600" height="600">
+            <!-- `x` and `y` are the location of the top-left corner of the rectangle -->
+            <rect x="5" y="5" width="95" height="20" stroke="red" fill="none"></rect>
+            <!--
+            `x` and `y` are the text's position referred to the start of the *baseline* of the text
+            (that is the invisible line that runs along the bottom of most letters).
+            By default, the `x` attribute sets the horizontal position of the start of the text.
+            -->
+            <text x="10" y="20" font-family="sans-serif">Hello, SVG!</text>
+        </svg>
+    </body>
+</html>

@@ -22,3 +22,7 @@ That consists of
 2) a prototype (a constructor's object-property that instances should be modeled after).
 
 The JavaScript's class-based inheritance is a *syntactic sugar* for prototype-based inheritance.
+
+**SVG = Scalable Vector Graphics**
+
+**XML = Extensible Markup Language**
