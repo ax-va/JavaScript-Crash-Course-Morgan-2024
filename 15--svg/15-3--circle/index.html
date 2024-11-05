@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SVG</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <svg width="600" height="600">
+            <!-- Japanese hanami dango -->
+            <!-- The order in which elements are declared defines the order in which they are drawn. -->
+            <!-- hex colors: #faa0a0 = salmon pink -->
+            <!--
+            For example, in the hex color #944e30, red has a value of 94,
+            green has a value of 4e, and blue has a value of 30.
+            These three values correspond to the decimal values 148, 78, and 48,
+            which together form a chestnut brown color.
+            Also, there is a shorthand three-digit form, when combining the duplicate digits into one.
+            For example, #000000 (black) can also be written as #000.
+            -->
+            <circle fill="#faa0a0" r="100" cx="124" cy="130"></circle>
+            <!-- #944e30 = chestnut brown           -->
+            <g stroke="#944e30" stroke-width="3">
+                <rect x="120" y="90" width="8" height="100" fill="#e1704d"></rect>
+                <circle fill="#acd270" r="18" cx="124" cy="150"></circle>
+                <circle fill="#fdfce2" r="18" cx="124" cy="120"></circle>
+                <circle fill="#f8c9dc" r="18" cx="124" cy="90"></circle>
+            </g>
+        </svg>
+        <script src="script.js"></script>
+    </body>
+</html>
