@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SVG</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <svg width="600" height="600">
+            <!--
+            The attributes of the parent `g` element
+            apply to all the child elements in the group.
+            Notice:
+            All the transformations are relative to the origin.
+            For example, scaling a square with a top-left corner of (10, 10)
+            and a bottom-right corner of (30, 30) by 2 results in,
+            that the new corners will be at (20, 20) and (60, 60).
+            -->
+            <g transform="translate(100, 50) scale(2, 5)" font-family="sans-serif" fill="blue">
+                <text x="0" y="20">Always</text>
+                <text x="0" y="40">Be</text>
+                <text x="0" y="60">Coding</text>
+            </g>
+        </svg>
+    </body>
+</html>
