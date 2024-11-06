@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SVG</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <svg width="600" height="600">
+            <!-- Draw the HTML5 logo -->
+            <path fill="#e44d26" d="M 0 0 H 182 L 165 185 L 90 206 L 17 185 Z"/>
+            <!-- `d` means data that are:
+            - `M 0 0` to move to the absolute position (x, y) without drawing anything;
+            - `H 182` to draw a horizontal line from the current position to the absolute position x;
+            - `L 165 185` to draw a line from the current position to (x, y);
+            - `L 90 206` to draw a line from the current position to (x, y);
+            - `L 17 185` to draw a line from the current position to (x, y);
+            - `Z` to close the path, drawing a line from the current position back to the start of the path.
+            Alternatively, relative positions from the current position to the next one can be used:
+            - `m 0 0 h 182 l -17 185 l -75 21 l -73 -21 z` or
+            - more compactly `m0 0h182l-17 185-75 21-73-21z`.
+            -->
+            <path fill="#f16529" d="M 91 15 H 165 L 151 173 L 91 190 Z"/>
+            <!-- relative path commands -->
+            <path fill="#ebebeb" d="m 34 38 h 57 v 23 h -32 l 2 24 h 30 v 23 h -51 z"/>
+            <path fill="#ebebeb" d="m 41 118 h 23 l 2 18 l 25 7 v 24 l -47 -13 z"/>
+            <path fill="#fff" d="m 148 38 h -57 v 23 h 55 z"/>
+            <path fill="#fff" d="m 143 85 h -52 v 23 h 28 l -3 30 l -25 5 v 24 l 47 -13 z"/>
+        </svg>
+        <script src="script.js"></script>
+    </body>
+</html>
