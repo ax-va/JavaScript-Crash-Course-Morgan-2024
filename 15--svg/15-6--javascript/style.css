@@ -1,0 +1,25 @@
+.boring {
+    fill: none;
+    stroke: black;
+    stroke-width: 3px;
+}
+
+.fun {
+    fill: hotpink;
+    stroke: greenyellow;
+    stroke-width: 5px;
+    stroke-dasharray: 10,5;
+    stroke-linejoin: round;
+}
+
+/*
+Use the `:hover` pseudo-class.
+Swap the fill and stroke color when the mouse
+hovers over one of the `.fun` elements.
+In the Canvas API unlike SVG, any mouse hover effects
+have to be explicitly coded in JavaScript.
+*/
+.fun:hover {
+    fill: greenyellow;
+    stroke: hotpink;
+}
