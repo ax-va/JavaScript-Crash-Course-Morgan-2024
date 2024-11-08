@@ -7,7 +7,7 @@ through a technique called *data binding*, where individual parts of the
 underlying data to visualize are linked to individual elements on the page.
 Changing the data results in changing the elements as well.
 
-**Event bubbling = Triggering an event on an element causes triggering the event on all its ancestors**
+**Event bubbling = triggering an event on an element causes triggering the event on all its ancestors**
 
 When an event is triggered on an element, 
 it also gets triggered on all the element's ancestors (parents, parents of parents, and so on).
