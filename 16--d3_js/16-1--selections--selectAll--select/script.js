@@ -1,3 +1,7 @@
+/*
+Demonstrate manipulating the DOM through D3's `selectAll()`, `select()`, and `insert()`.
+ */
+
 // Select all the SVG circles by a CSS selector (`circle`) and set the "fill" attribute
 // of every element in the selection to "hotpink" to change their colors.
 d3.selectAll("circle").attr("fill", "hotpink");
