@@ -3,8 +3,8 @@
 **D3 = Data-Driven Documents**
 
 The *D3* library leverages SVG and JavaScript to create data visualizations
-through a technique called *data binding*, where individual parts of the
-underlying data to visualize are linked to individual elements on the page.
+through a technique called *data binding* so that each individual piece of the data, 
+called a *datum*, is bound to an individual element on the page (usually an SVG element).
 Changing the data results in changing the elements as well.
 
 **Event bubbling = triggering an event on an element causes triggering the event on all its ancestors**
