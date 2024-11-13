@@ -17,16 +17,32 @@ let svg = d3
     .attr("width", width)
     .attr("height", height);
 
+// Add a top axis container to show count values
+let topContainer = svg
+    .append("g")
+    .attr("id", "top")
+    // Translate down by `margin.top`
+    .attr("transform", `translate(0, ${margin.top})`);
+
+// Add a left axis container to show character values
+let leftContainer = svg
+    .append("g")
+    .attr("id", "left")
+    // Translate to the right by `margin.left`
+    .attr("transform", `translate(${margin.left}, 0)`);
+
 function update(data) {
     /*
-    Creates / updates a horizontally oriented, scaled bar chart.
+    Creates / updates a horizontally oriented, scaled, labeled, tick-marked bar chart.
      */
 
     // to linearly map input values to output values
     let xScale = d3
         .scaleLinear()
         .domain([0, d3.max(data, d => d.count)])
-        .range([margin.left, width - margin.right]);
+        .range([margin.left, width - margin.right])
+        // Extends the domain to the next "ticked" number and draw this tick too.
+        .nice();
 
     // to create a set of evenly spaced bands
     let yScale = d3
@@ -37,6 +53,30 @@ function update(data) {
         // 0 means that they are as tall as possible and will be touching,
         // 0.5 means that the bars will take up half of the space available.
         .padding(0.5);
+
+    // Only ticks associated with integer numbers should be drawn because the counts are integer.
+    // For this purpose:
+    // 1. filter them to only integers, for example,
+    // [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4] to [0, 1, 2, 3, 4]
+    let topAxisTicks = xScale
+        .ticks()
+        .filter(tick => Number.isInteger(tick));
+
+    // axis generators
+    let topAxis = d3
+        .axisTop(xScale)
+        // 2. set those tick values on the axis
+        .tickValues(topAxisTicks)
+        // 3. set a rendering format for the numbers to format numbers without the decimal point
+        .tickFormat(d3.format("d"));
+    let leftAxis = d3.axisLeft(yScale);
+    // Pass the axis generators to the D3 `call` method and
+    // chain them to the `topContainer` and `leftContainer` selections.
+    topContainer.call(topAxis);
+    leftContainer.call(leftAxis);
+    // `topContainer.call(topAxis);` is equivalent to `topAxis(topContainer);` but the first one is preferred.
+    // ->
+    // The `call` method makes it easier to chain other methods to the statement`.
 
     svg
         .selectAll("rect")
@@ -79,6 +119,6 @@ d3
         data.sort((a, b) => d3.ascending(a.char, b.char));
         // See in the console that everything is working as expected
         console.log(data);
-        // Create / update a horizontally oriented, scaled bar chart
+        // Create / update a horizontally oriented, scaled, labeled, tick-marked bar chart
         update(data);
     });
