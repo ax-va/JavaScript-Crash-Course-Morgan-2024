@@ -67,7 +67,7 @@ function update(data) {
         .axisTop(xScale)
         // 2. set those tick values on the axis
         .tickValues(topAxisTicks)
-        // 3. set a rendering format for the numbers to format numbers without the decimal point
+        // 3. set a rendering format for the numbers to render numbers without the decimal point
         .tickFormat(d3.format("d"));
     let leftAxis = d3.axisLeft(yScale);
     // Pass the axis generators to the D3 `call` method and
