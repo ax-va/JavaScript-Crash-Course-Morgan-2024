@@ -56,7 +56,7 @@ function update(data) {
 
     // Only ticks associated with integer numbers should be drawn because the counts are integer.
     // For this purpose:
-    // 1. filter them to only integers, for example,
+    // (ticks) 1. filter them to only integers, for example,
     // [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4] to [0, 1, 2, 3, 4]
     let topAxisTicks = xScale
         .ticks()
@@ -65,18 +65,18 @@ function update(data) {
     // axis generators
     let topAxis = d3
         .axisTop(xScale)
-        // 2. set those tick values on the axis
+        // (ticks) 2. set those tick values on the axis
         .tickValues(topAxisTicks)
-        // 3. set a rendering format for the numbers to render numbers without the decimal point
+        // (ticks) 3. set a rendering format for the numbers to render numbers without the decimal point
         .tickFormat(d3.format("d"));
     let leftAxis = d3.axisLeft(yScale);
     // Pass the axis generators to the D3 `call` method and
     // chain them to the `topContainer` and `leftContainer` selections.
     topContainer.call(topAxis);
     leftContainer.call(leftAxis);
-    // `topContainer.call(topAxis);` is equivalent to `topAxis(topContainer);` but the first one is preferred.
-    // ->
-    // The `call` method makes it easier to chain other methods to the statement`.
+    // `topContainer.call(topAxis)` is equivalent to `topAxis(topContainer)`.
+    // But the `call` method makes it easier to chain other methods to the statement.
+    // Hence it is preferred.
 
     svg
         .selectAll("rect")
