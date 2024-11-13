@@ -41,7 +41,7 @@ function update(data) {
         .scaleLinear()
         .domain([0, d3.max(data, d => d.count)])
         .range([margin.left, width - margin.right])
-        // Extends the domain to the next "ticked" number and draw this tick too.
+        // Extend the domain to the next "ticked" number and draw this tick too
         .nice();
 
     // to create a set of evenly spaced bands
