@@ -84,10 +84,10 @@ function update(data) {
         .join("rect")
         // `xScale(0)` returns the horizontal position of the left side of the current bar.
         // `xScale(d.count)` returns the horizontal position of the right side of the current bar.
-        .attr("width", (d, i) => xScale(d.count) - xScale(0)) // `.attr("width", (d, i) => d.count * 5)` to set manually
-        .attr("height", yScale.bandwidth()) // `.attr("height", 10)` to set manually
-        .attr("x", xScale(0)) // `.attr("x", 20)` to set manually
-        .attr("y", (d, i) => yScale(d.char)); // `.attr("y", (d, i) => i * 20)` to set manually
+        .attr("width", (d, i) => xScale(d.count) - xScale(0)) // `.attr("width", (d, i) => d.count * 5)` without autoscaling
+        .attr("height", yScale.bandwidth()) // `.attr("height", 10)` without autoscaling
+        .attr("x", xScale(0)) // `.attr("x", 20)` without autoscaling
+        .attr("y", (d, i) => yScale(d.char)); // `.attr("y", (d, i) => i * 20)` without autoscaling
 }
 
 d3
