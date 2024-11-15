@@ -31,6 +31,36 @@ let leftContainer = svg
     // Translate to the right by `margin.left`
     .attr("transform", `translate(${margin.left}, 0)`);
 
+function getClass(char) {
+    /*
+    Classifies standardized characters (to set then class attributes of character bars).
+     */
+    if (char == "<space>") {
+        return "whitespace";
+    } else if (/^[a-z]$/.test(char)) {
+        return "lower";
+    } else if (/^[A-Z]$/.test(char)) {
+        return "upper";
+    } else if (/^[0-9]$/.test(char)) {
+        return "number";
+    } else {
+        return "other";
+    }
+}
+
+function standardizeSpace(char) {
+    /*
+    Convert all whitespace characters (spaces, newlines, tabs, and so on)
+    to the same "<space>" string before the character counting.
+     */
+    // If `trim()` returns an empty string, the character is whitespace
+    if (char.trim() == "") {
+        return "<space>";
+    } else {
+        return char;
+    }
+}
+
 function update(data) {
     /*
     Creates / updates a horizontally oriented, scaled, labeled, tick-marked bar chart.
@@ -70,6 +100,8 @@ function update(data) {
         // (ticks) 3. set a rendering format for the numbers to render numbers without the decimal point
         .tickFormat(d3.format("d"));
     let leftAxis = d3.axisLeft(yScale);
+
+    /*
     // Pass the axis generators to the D3 `call` method and
     // chain them to the `topContainer` and `leftContainer` selections.
     topContainer.call(topAxis);
@@ -77,9 +109,19 @@ function update(data) {
     // `topContainer.call(topAxis)` is equivalent to `topAxis(topContainer)`.
     // But the `call` method makes it easier to chain other methods to the statement.
     // Hence it is preferred.
+     */
+
+    // Add animation
+    topContainer
+        .transition()
+        .call(topAxis);
+    leftContainer
+        .transition()
+        .call(leftAxis);
 
     svg
         .selectAll("rect")
+        /*
         .data(data)
         .join("rect")
         // `xScale(0)` returns the horizontal position of the left side of the current bar.
@@ -87,7 +129,36 @@ function update(data) {
         .attr("width", (d, i) => xScale(d.count) - xScale(0)) // `.attr("width", (d, i) => d.count * 5)` without autoscaling
         .attr("height", yScale.bandwidth()) // `.attr("height", 10)` without autoscaling
         .attr("x", xScale(0)) // `.attr("x", 20)` without autoscaling
-        .attr("y", (d, i) => yScale(d.char)); // `.attr("y", (d, i) => i * 20)` without autoscaling
+        .attr("y", (d, i) => yScale(d.char)) // `.attr("y", (d, i) => i * 20)` without autoscaling
+        // Set one of the class attributes: "lower", "upper", "number", "whitespace", and "other".
+        .attr("class", (d, i) => getClass(d.char));
+         */
+        // Add animation
+        .data(data, d => d.char) // Use a key function to make `d.char` an identifier
+        .join(
+            enter => enter
+                // not animated
+                .append("rect")
+                .attr("x", xScale(0))
+                .attr("y", (d, i) => yScale(d.char))
+                .attr("class", d => getClass(d.char))
+                .transition()
+                // animated
+                .attr("width", d => xScale(d.count) - xScale(0))
+                .attr("height", yScale.bandwidth()),
+            update => update
+                .transition()
+                // animated
+                .attr("width", d => xScale(d.count) - xScale(0))
+                .attr("height", yScale.bandwidth())
+                .attr("y", (d, i) => yScale(d.char)),
+            exit => exit
+                .transition()
+                // animated
+                .attr("width", 0)
+                .attr("height", 0)
+                .remove()
+            );
 }
 
 d3
@@ -98,8 +169,9 @@ d3
         let frequencies = {};
         // Split the text in individual characters and iterate trough them
         e.target.value.split("").forEach((char) => {
-            let currentCount = frequencies[char] || 0; // 0 by default
-            frequencies[char] = currentCount + 1;
+            let standardizedChar = standardizeSpace(char);
+            let currentCount = frequencies[standardizedChar] || 0; // 0 by default
+            frequencies[standardizedChar] = currentCount + 1;
         });
         // Make from the frequencies object like
         // {"h": 1, "e": 1, "l": 2, "o": 1}
@@ -117,8 +189,8 @@ d3
         // based on the `char` property of each object
         // by applying a comparison function to every pair of elements `a` and `b`.
         data.sort((a, b) => d3.ascending(a.char, b.char));
-        // See in the console that everything is working as expected
-        console.log(data);
+        // // See in the console that everything is working as expected
+        // console.log(data);
         // Create / update a horizontally oriented, scaled, labeled, tick-marked bar chart
         update(data);
     });

@@ -2,3 +2,23 @@
 Differentiate the types of characters through different colors of the bars depending on
 whether they are lowercase letters, uppercase letters, numbers, or any other character.
 */
+
+.lower {
+    fill: purple;
+}
+
+.upper {
+    fill: orangered;
+}
+
+.number {
+    fill: green;
+}
+
+.whitespace {
+    fill: lightslategray;
+}
+
+.other {
+    fill: #555;
+}
