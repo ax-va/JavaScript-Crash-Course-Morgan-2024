@@ -35,7 +35,7 @@ function getClass(char) {
     /*
     Classifies standardized characters (to set then class attributes of character bars).
      */
-    if (char == "<space>") {
+    if (char == "<\\s>") {
         return "whitespace";
     } else if (/^[a-z]$/.test(char)) {
         return "lower";
@@ -51,11 +51,11 @@ function getClass(char) {
 function standardizeSpace(char) {
     /*
     Convert all whitespace characters (spaces, newlines, tabs, and so on)
-    to the same "<space>" string before the character counting.
+    to the same "<\\s>" string before the character counting.
      */
     // If `trim()` returns an empty string, the character is whitespace
     if (char.trim() == "") {
-        return "<space>";
+        return "<\\s>";
     } else {
         return char;
     }
