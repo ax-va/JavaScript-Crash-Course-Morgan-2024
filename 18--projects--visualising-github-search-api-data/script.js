@@ -67,7 +67,6 @@ function update(items) {
         // Each bar is drawn from its top-left corner,
         // and that the heights are calculated
         // such that the bottoms of all the bars align.
-
 }
 
 function getUrl() {
