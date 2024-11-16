@@ -3,10 +3,11 @@ Create a bar graph that visualizes the frequency of characters in a text box.
 The bar graph will update as new text is typed or pasted into the box.
  */
 
-// Set the width and height of the svg element
+// Define the width and height of the svg element
 // that will be added to the DOM below.
 const WIDTH = 600;
 const HEIGHT = 600;
+// Define the whitespace designation for labeling
 const WHITESPACE = "<\\s>"
 
 let margin = {top: 20, right: 10, bottom: 20, left: 50};
