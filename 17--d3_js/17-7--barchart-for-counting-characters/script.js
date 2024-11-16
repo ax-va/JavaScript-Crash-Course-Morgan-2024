@@ -5,8 +5,9 @@ The bar graph will update as new text is typed or pasted into the box.
 
 // Set the width and height of the svg element
 // that will be added to the DOM below.
-const width = 600;
-const height = 600;
+const WIDTH = 600;
+const HEIGHT = 600;
+const WHITESPACE = "<\\s>"
 
 let margin = {top: 20, right: 10, bottom: 20, left: 50};
 
@@ -14,8 +15,8 @@ let margin = {top: 20, right: 10, bottom: 20, left: 50};
 let svg = d3
     .select("body")
     .append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width", WIDTH)
+    .attr("height", HEIGHT);
 
 // Add a top axis container to show count values
 let topContainer = svg
@@ -35,7 +36,7 @@ function getClass(char) {
     /*
     Classifies standardized characters (to set then class attributes of character bars).
      */
-    if (char == "<\\s>") {
+    if (char == WHITESPACE) {
         return "whitespace";
     } else if (/^[a-z]$/.test(char)) {
         return "lower";
@@ -54,11 +55,7 @@ function standardizeSpace(char) {
     to the same "<\\s>" string before the character counting.
      */
     // If `trim()` returns an empty string, the character is whitespace
-    if (char.trim() == "") {
-        return "<\\s>";
-    } else {
-        return char;
-    }
+    return char.trim() == "" ? WHITESPACE : char;
 }
 
 function update(data) {
@@ -70,7 +67,7 @@ function update(data) {
     let xScale = d3
         .scaleLinear()
         .domain([0, d3.max(data, d => d.count)])
-        .range([margin.left, width - margin.right])
+        .range([margin.left, WIDTH - margin.right])
         // Extend the domain to the next "ticked" number and draw this tick too
         .nice();
 
@@ -78,7 +75,7 @@ function update(data) {
     let yScale = d3
         .scaleBand()
         .domain(data.map(d => d.char))
-        .range([margin.top, height - margin.bottom])
+        .range([margin.top, HEIGHT - margin.bottom])
         // Define how much space there is between bars based on the space available:
         // 0 means that they are as tall as possible and will be touching,
         // 0.5 means that the bars will take up half of the space available.
@@ -188,7 +185,18 @@ d3
         // Sort the array of objects into ascending alphabetical order
         // based on the `char` property of each object
         // by applying a comparison function to every pair of elements `a` and `b`.
-        data.sort((a, b) => d3.ascending(a.char, b.char));
+        data.sort((a, b) => {
+            // Ensure that the whitespace designation is always at the top of the barchart
+            if (a.char === WHITESPACE) {
+                return -1; // `a.char` before `b.char`
+            }
+            else if (b.char === WHITESPACE) {
+                return 1; // `b.char` before `a.char`
+            }
+            else {
+                return d3.ascending(a.char, b.char);
+            }
+        });
         // // See in the console that everything is working as expected
         // console.log(data);
         // Create / update a horizontally oriented, scaled, labeled, tick-marked bar chart
