@@ -5,7 +5,9 @@ let margin = {top: 20, right: 10, bottom: 20, left: 50};
 
 let svg = d3
     .select("body")
-    .append("svg")
+    // The sidebar appears to the right of the graph,
+    // as the `svg` element appears before the sidebar in the flex container.
+    .insert("svg", "#sidebar") // instead of `.append("svg")`
     .attr("width", width)
     .attr("height", height);
 
@@ -20,6 +22,17 @@ let leftContainer = svg
     .append("g")
     .attr("id", "left")
     .attr("transform", `translate(${margin.left}, 0)`);
+
+function getLicense(d) {
+    // The *optional chaining operator* (`?`) returns `undefined`
+    // if the object to the left of the operator is `null` or `undefined`.
+    let license = d.license?.name;
+    if (!license) {
+        return "N/A";
+    } else {
+        return license;
+    }
+}
 
 function update(items) {
     ///////////////
@@ -63,10 +76,19 @@ function update(items) {
         .attr("x", d => xScale(d.full_name))
         .attr("y", d => yScale(d.stargazers_count))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => yScale(0) - yScale(d.stargazers_count));
         // Each bar is drawn from its top-left corner,
         // and that the heights are calculated
         // such that the bottoms of all the bars align.
+        .attr("height", d => yScale(0) - yScale(d.stargazers_count))
+        .on("mouseover", (e, d) => {
+            let info = d3.select("#info");
+            info
+                .select(".repo .value a")
+                .text(d.full_name)
+                .attr("href", d.xhtml_url);
+            info.select(".license .value").text(getLicense(d));
+            info.select(".stars .value").text(d.stargazers_count);
+        });
 }
 
 function getUrl() {
