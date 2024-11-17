@@ -105,8 +105,8 @@ function update(items) {
             info.select(".stars .value").text(d.stargazers_count);
         });
 
-    // Add an explanation for licence colors
-    d3.select("#key")
+    // Add a legend for license colors
+    d3.select("#licenses-legend")
         .selectAll("p")
         .data(licenses)
         .join(
