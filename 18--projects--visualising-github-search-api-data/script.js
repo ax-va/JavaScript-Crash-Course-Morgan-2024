@@ -28,7 +28,7 @@ let chartHeight = (HEIGHT - margin.bottom) - margin.top;
 let midPoint = margin.top + chartHeight / 2;
 svg
     .append("text")
-    .text("Stars")
+    .text("Number of Stars")
     .style("font-size", "14px")
     // Center the text label around its calculated position
     .attr("text-anchor", "middle")
