@@ -29,12 +29,13 @@ body {
     text-decoration: underline;
 }
 
-#licenses-legend h1 {
+/* legend of colors of licenses */
+#colors-legend h1 {
     font-size: 1.5em; /* 1.5 times the font size of the parent element */
 }
 
-/* Style the squares of color that appear as part of the key */
-#licenses-legend .color {
+/* Style the squares of color */
+#colors-legend .color {
     display: inline-block; /* Do not force a new line but have fixed dimensions and margins */
     width: 10px;
     height: 10px;
