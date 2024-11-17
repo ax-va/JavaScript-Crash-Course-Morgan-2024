@@ -1,5 +1,5 @@
-const width = 600;
-const height = 400;
+const WIDTH = 600;
+const HEIGHT = 400;
 
 let margin = {top: 20, right: 10, bottom: 20, left: 50};
 
@@ -8,20 +8,33 @@ let svg = d3
     // The sidebar appears to the right of the graph,
     // as the `svg` element appears before the sidebar in the flex container.
     .insert("svg", "#sidebar") // instead of `.append("svg")`
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width", WIDTH)
+    .attr("height", HEIGHT);
 
 // Add a bottom axis container
 let bottomContainer = svg
     .append("g")
     .attr("id", "bottom")
-    .attr("transform", `translate(0, ${height - margin.bottom})`);
+    .attr("transform", `translate(0, ${HEIGHT - margin.bottom})`);
 
 // Add a left axis container
 let leftContainer = svg
     .append("g")
     .attr("id", "left")
     .attr("transform", `translate(${margin.left}, 0)`);
+
+// Add a label to the left axis
+let chartHeight = (HEIGHT - margin.bottom) - margin.top;
+let midPoint = margin.top + chartHeight / 2;
+svg
+    .append("text")
+    .text("Stars")
+    .style("font-size", "14px")
+    // Center the text label around its calculated position
+    .attr("text-anchor", "middle")
+    // 1. Translate the center of the label to the position.
+    // 2. Rotate it on 90 degrees counterclockwise (or 270 degrees clockwise).
+    .attr("transform", `translate(12, ${midPoint}) rotate(270)`);
 
 function getLicense(d) {
     // The *optional chaining operator* (`?`) returns `undefined`
@@ -54,12 +67,12 @@ function update(items) {
     ///////////////
     let xScale = d3.scaleBand()
         .domain(items.map(d => d.full_name))
-        .range([margin.left, width - margin.right])
+        .range([margin.left, WIDTH - margin.right])
         .padding(0.3);
 
     let yScale = d3.scaleLinear()
         .domain([0, d3.max(items, d => d.stargazers_count)])
-        .range([height - margin.bottom, margin.top])
+        .range([HEIGHT - margin.bottom, margin.top])
         // Round the top of the scale to the next tick value
         .nice();
 
@@ -106,7 +119,7 @@ function update(items) {
         });
 
     // Add a legend for colors of licenses
-    d3.select("#colors-legend")
+    d3.select("#legend-colors")
         .selectAll("p")
         .data(licenses)
         .join(
@@ -129,7 +142,7 @@ to a properly formatted and encoded URL.
  */
     let baseUrl = "https://api.github.com/search/repositories";
     let params = {
-        q: "language:javascript stars:>25000",
+        q: "language:rust stars:>25000",
         per_page: 20,
         sort: "stars"
     };
@@ -140,7 +153,6 @@ to a properly formatted and encoded URL.
         .join("&");
     return `${baseUrl}?${queryString}`;
 }
-
 
 let url = getUrl();
 
