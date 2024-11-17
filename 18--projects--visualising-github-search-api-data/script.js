@@ -35,6 +35,20 @@ function getLicense(d) {
 }
 
 function update(items) {
+    // Collect all the *unique* license names
+    // passing the names to the `Set` constructor.
+    // In JavaScript, sets maintain their order, like arrays.
+    let licenses = new Set(items.map(d => getLicense(d)));
+    // Create a scale with discrete inputs and discrete outputs for the licence colors
+    let colorScale = d3
+        .scaleOrdinal()
+        .domain(licenses)
+        // Use an array of 10 hex color strings:
+        // ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
+        // If there are more than 10 licenses, the colors wrap around to the beginning again
+        // (the eleventh and twelfth licenses will use the same colors as the first and second ones).
+        .range(d3.schemeCategory10);
+
     ///////////////
     // Draw axis //
     ///////////////
@@ -75,6 +89,7 @@ function update(items) {
         .join("rect")
         .attr("x", d => xScale(d.full_name))
         .attr("y", d => yScale(d.stargazers_count))
+        .attr("fill", d => colorScale(getLicense(d)))
         .attr("width", xScale.bandwidth())
         // Each bar is drawn from its top-left corner,
         // and that the heights are calculated
@@ -85,10 +100,26 @@ function update(items) {
             info
                 .select(".repo .value a")
                 .text(d.full_name)
-                .attr("href", d.xhtml_url);
+                .attr("href", d.html_url);
             info.select(".license .value").text(getLicense(d));
             info.select(".stars .value").text(d.stargazers_count);
         });
+
+    // Add an explanation for licence colors
+    d3.select("#key")
+        .selectAll("p")
+        .data(licenses)
+        .join(
+            enter => {
+                let p = enter.append("p");
+                p.append("div")
+                    .attr("class", "color")
+                    .style("background-color", d => colorScale(d));
+                p.append("span")
+                    .text(d => d)
+                return p;
+            }
+        );
 }
 
 function getUrl() {
