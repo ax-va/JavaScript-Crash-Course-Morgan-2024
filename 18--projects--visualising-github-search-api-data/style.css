@@ -29,7 +29,7 @@ body {
     text-decoration: underline;
 }
 
-/* legend of colors of licenses */
+/* legend of licenses with colors */
 #legend-colors h1 {
     font-size: 1.5em; /* 1.5 times the font size of the parent element */
 }

@@ -47,7 +47,11 @@ function getLicense(d) {
     }
 }
 
+let hiddenLicenses = new Set();
+
 function update(items) {
+    // filtered items without the hidden licenses
+    let filteredItems = items.filter(d => !hiddenLicenses.has(getLicense(d)));
     // Collect all the *unique* license names
     // passing the names to the `Set` constructor.
     // In JavaScript, sets maintain their order, like arrays.
@@ -66,12 +70,12 @@ function update(items) {
     // Draw axis //
     ///////////////
     let xScale = d3.scaleBand()
-        .domain(items.map(d => d.full_name))
+        .domain(filteredItems.map(d => d.full_name)) // instead of `.domain(items.map(d => d.full_name))`
         .range([margin.left, WIDTH - margin.right])
         .padding(0.3);
 
     let yScale = d3.scaleLinear()
-        .domain([0, d3.max(items, d => d.stargazers_count)])
+        .domain([0, d3.max(filteredItems, d => d.stargazers_count)]) // instead of `.domain([0, d3.max(items, d => d.stargazers_count)])`
         .range([HEIGHT - margin.bottom, margin.top])
         // Round the top of the scale to the next tick value
         .nice();
@@ -92,13 +96,13 @@ function update(items) {
     bottomContainer.call(bottomAxis);
     leftContainer.call(leftAxis);
 
-    ///////////////
-    // Draw bars //
-    ///////////////
+    ///////////////////////////
+    // Draw bars and infobox //
+    ///////////////////////////
     svg
         .selectAll("rect")
         // Use `full_name` in the key function for unique identifiers
-        .data(items, d => d.full_name)
+        .data(filteredItems, d => d.full_name) // instead of `.data(items, d => d.full_name)`
         .join("rect")
         .attr("x", d => xScale(d.full_name))
         .attr("y", d => yScale(d.stargazers_count))
@@ -108,31 +112,76 @@ function update(items) {
         // and that the heights are calculated
         // such that the bottoms of all the bars align.
         .attr("height", d => yScale(0) - yScale(d.stargazers_count))
+        // Add information into infobox
         .on("mouseover", (e, d) => {
             let info = d3.select("#info");
-            info
-                .select(".repo .value a")
+            info.select(".repo .value a")
                 .text(d.full_name)
                 .attr("href", d.html_url);
-            info.select(".license .value").text(getLicense(d));
-            info.select(".stars .value").text(d.stargazers_count);
+            info.select(".license .value")
+                .text(getLicense(d));
+            info.select(".stars .value")
+                .text(d.stargazers_count);
         });
 
-    // Add a legend for colors of licenses
+    ////////////////////////////////////////////////////
+    // Draw legend for licences with colors and checkboxes //
+    ////////////////////////////////////////////////////
+    // Add a legend for licenses with colors
     d3.select("#legend-colors")
         .selectAll("p")
         .data(licenses)
         .join(
             enter => {
                 let p = enter.append("p");
+                // Add checkboxes to filter licenses
+                p.append("input")
+                    .attr("type", "checkbox")
+                    // Notice:
+                    // `.attr("checked", true)`
+                    // sets an *initial state* of a checkbox in the DOM.
+                    // After the checkbox is rendered, user interactions
+                    // modify the property, not the attribute.
+                    // Therefore we set the property.
+                    .property("checked", d => !hiddenLicenses.has(d))
+                    .attr("title", "Include in chart")
+                    .on("change", (e, d) => {
+                        // `d` is item of `licenses` because `input`
+                        // is a child of `p` and is bound to the same data.
+                        if (e.target.checked) {
+                            hiddenLicenses.delete(d);
+                        } else {
+                            hiddenLicenses.add(d);
+                        }
+                        // console.log(hiddenLicenses);
+                        // Call `update` itself if a checkbox is clicked
+                        update(items);
+                    });
+                // Add colored squares
                 p.append("div")
                     .attr("class", "color")
                     .style("background-color", d => colorScale(d));
+                // Add license names
                 p.append("span")
                     .text(d => d)
                 return p;
             }
         );
+
+/*
+    d3.selectAll("#legend-colors input").on("change", (e, d) => {
+        // `d` is item of `licenses` because `input`
+        // is a child of `p` and is bound to the same data.
+        if (e.target.checked) {
+            hiddenLicenses.delete(d);
+        } else {
+            hiddenLicenses.add(d);
+        }
+        // console.log(hiddenLicenses);
+        // Call `update` itself if a checkbox is clicked
+        update(items);
+    });
+*/
 }
 
 function getUrl() {
