@@ -124,9 +124,9 @@ function update(items) {
                 .text(d.stargazers_count);
         });
 
-    ////////////////////////////////////////////////////
-    // Draw legend for licences with colors and checkboxes //
-    ////////////////////////////////////////////////////
+    //////////////////////////////////////////
+    // Draw legend for licences with colors //
+    //////////////////////////////////////////
     // Add a legend for licenses with colors
     d3.select("#legend-colors")
         .selectAll("p")
