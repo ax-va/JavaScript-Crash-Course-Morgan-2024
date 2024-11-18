@@ -124,10 +124,7 @@ function update(items) {
                 .text(d.stargazers_count);
         });
 
-    //////////////////////////////////////////
-    // Draw legend for licences with colors //
-    //////////////////////////////////////////
-    // Add a legend for licenses with colors
+    // Add a legend for licenses with colors and checkboxes
     d3.select("#legend-colors")
         .selectAll("p")
         .data(licenses)
@@ -146,8 +143,6 @@ function update(items) {
                     .property("checked", d => !hiddenLicenses.has(d))
                     .attr("title", "Include in chart")
                     .on("change", (e, d) => {
-                        // `d` is item of `licenses` because `input`
-                        // is a child of `p` and is bound to the same data.
                         if (e.target.checked) {
                             hiddenLicenses.delete(d);
                         } else {
@@ -182,6 +177,7 @@ function update(items) {
         update(items);
     });
 */
+
 }
 
 function getUrl() {
