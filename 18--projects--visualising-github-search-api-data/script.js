@@ -143,6 +143,8 @@ function update(items) {
                     .property("checked", d => !hiddenLicenses.has(d))
                     .attr("title", "Include in chart")
                     .on("change", (e, d) => {
+                        // Log the current state of the checkbox
+                        console.log(`Checkbox for license "${d}" is now:`, e.target.checked);
                         if (e.target.checked) {
                             hiddenLicenses.delete(d);
                         } else {
@@ -168,8 +170,7 @@ function update(items) {
         // `d` is item of `licenses` because `input`
         // is a child of `p` and is bound to the same data.
         if (e.target.checked) {
-            hiddenLicenses.delete(d);
-        } else {
+            hiddenLicenses.delete(d); } else {
             hiddenLicenses.add(d);
         }
         // console.log(hiddenLicenses);
