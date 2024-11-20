@@ -45,7 +45,7 @@ function getLicense(d) {
     // if the object to the left of the operator is `null` or `undefined`.
     let license = d.license?.name;
     if (!license) {
-        return "N/A";
+        return "<No data available>";
     } else {
         return license;
     }
