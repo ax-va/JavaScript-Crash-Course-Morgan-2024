@@ -1,8 +1,44 @@
 /*
-This script is with an OOP part.
+This script is without OOP.
  */
 
-let hiddenLicenses = new Set();
+const WIDTH = 600;
+const HEIGHT = 400;
+
+let margin = {top: 20, right: 10, bottom: 20, left: 50};
+
+let svg = d3
+    .select("body")
+    // The sidebar appears to the right of the graph,
+    // as the `svg` element appears before the sidebar in the flex container.
+    .insert("svg", "#sidebar") // instead of `.append("svg")`
+    .attr("width", WIDTH)
+    .attr("height", HEIGHT);
+
+// Add a bottom axis container
+let bottomContainer = svg
+    .append("g")
+    .attr("id", "bottom")
+    .attr("transform", `translate(0, ${HEIGHT - margin.bottom})`);
+
+// Add a left axis container
+let leftContainer = svg
+    .append("g")
+    .attr("id", "left")
+    .attr("transform", `translate(${margin.left}, 0)`);
+
+// Add a label to the left axis
+let chartHeight = (HEIGHT - margin.bottom) - margin.top;
+let midPoint = margin.top + chartHeight / 2;
+svg
+    .append("text")
+    .text("Stars")
+    .style("font-size", "14px")
+    // Center the text label around its calculated position
+    .attr("text-anchor", "middle")
+    // 1. Translate the center of the label to the position.
+    // 2. Rotate it on 90 degrees counterclockwise (or 270 degrees clockwise).
+    .attr("transform", `translate(12, ${midPoint}) rotate(270)`);
 
 function getLicense(d) {
     // The *optional chaining operator* (`?`) returns `undefined`
@@ -15,165 +51,159 @@ function getLicense(d) {
     }
 }
 
-class Chart {
-    constructor(items) {
-        this.items = items;
-        this.width = 600;
-        this.height = 400;
-        this.margin = {top: 20, right: 10, bottom: 20, left: 50};
+let hiddenLicenses = new Set();
 
-        this.svg = d3
-            .select("body")
-            // The sidebar appears to the right of the graph,
-            // as the `svg` element appears before the sidebar in the flex container.
-            .insert("svg", "#sidebar") // instead of `.append("svg")`
-            .attr("width", this.width)
-            .attr("height", this.height);
+function update(items) {
+    // filtered items without the hidden licenses
+    let filteredItems = items.filter(d => !hiddenLicenses.has(getLicense(d)));
+    // Collect all the *unique* license names
+    // passing the names to the `Set` constructor.
+    // In JavaScript, sets maintain their order, like arrays.
+    let licenses = new Set(items.map(d => getLicense(d)));
+    // Create a scale with discrete inputs and discrete outputs for the licence colors
+    let colorScale = d3
+        .scaleOrdinal()
+        .domain(licenses)
+        // Use an array of 10 hex color strings:
+        // ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
+        // If there are more than 10 licenses, the colors wrap around to the beginning again
+        // (the eleventh and twelfth licenses will use the same colors as the first and second ones).
+        .range(d3.schemeCategory10);
 
-        // Add a bottom axis container
-        this.bottomContainer = this.svg
-            .append("g")
-            .attr("id", "bottom")
-            .attr("transform", `translate(0, ${this.height - this.margin.bottom})`);
+    ///////////////
+    // Draw axis //
+    ///////////////
+    let xScale = d3.scaleBand()
+        .domain(filteredItems.map(d => d.full_name)) // instead of `.domain(items.map(d => d.full_name))`
+        .range([margin.left, WIDTH - margin.right])
+        .padding(0.3);
 
-        // Add a left axis container
-        this.leftContainer = this.svg
-            .append("g")
-            .attr("id", "left")
-            .attr("transform", `translate(${this.margin.left}, 0)`);
+    let yScale = d3.scaleLinear()
+        .domain([0, d3.max(filteredItems, d => d.stargazers_count)]) // instead of `.domain([0, d3.max(items, d => d.stargazers_count)])`
+        .range([HEIGHT - margin.bottom, margin.top])
+        // Round the top of the scale to the next tick value
+        .nice();
 
-        // Add a label to the left axis
-        let chartHeight = (this.height - this.margin.bottom) - this.margin.top;
-        let midPoint = this.margin.top + chartHeight / 2;
-        this.svg
-            .append("text")
-            .text("Stars")
-            .style("font-size", "14px")
-            // Center the text label around its calculated position
-            .attr("text-anchor", "middle")
-            // 1. Translate the center of the label to the position.
-            // 2. Rotate it on 90 degrees counterclockwise (or 270 degrees clockwise).
-            .attr("transform", `translate(12, ${midPoint}) rotate(270)`);
+    // Create axis generators
+    let bottomAxis = d3
+        .axisBottom(xScale)
+        // Remove the ticks from the bottom axis
+        // by setting the tick values to be an empty list.
+        .tickValues([]);
+    let leftAxis = d3
+        .axisLeft(yScale)
+        // Use a format specifier to render the numbers
+        // with the "k" and "M" shorthands
+        // like 200,000 as 200k and 1,000,000 as 1M.
+        .tickFormat(d3.format("~s"));
+    // Use the generators to draw the axes to the containers
+    bottomContainer.call(bottomAxis);
+    leftContainer
+        .transition()
+        .call(leftAxis);
 
-        // Collect all the *unique* license names passing the names to the `Set` constructor.
-        // In JavaScript, sets maintain their order, like arrays.
-        this.licenses = new Set(this.items.map(d => getLicense(d)));
-        this.colorScale = d3
-            .scaleOrdinal()
-            .domain(this.licenses)
-            // Use an array of 10 hex color strings:
-            // ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
-            // If there are more than 10 licenses, the colors wrap around to the beginning again
-            // (the eleventh and twelfth licenses will use the same colors as the first and second ones).
-            .range(d3.schemeCategory10);
-    }
-
-    update() {
-        // filtered items without the hidden licenses
-        let filteredItems = this.items.filter(d => !hiddenLicenses.has(getLicense(d)));
-        ///////////////
-        // Draw axis //
-        ///////////////
-        let xScale = d3.scaleBand()
-            .domain(filteredItems.map(d => d.full_name)) // instead of `.domain(this.items.map(d => d.full_name))`
-            .range([this.margin.left, this.width - this.margin.right])
-            .padding(0.3);
-
-        let yScale = d3.scaleLinear()
-            .domain([0, d3.max(filteredItems, d => d.stargazers_count)]) // instead of `.domain([0, d3.max(this.items, d => d.stargazers_count)])`
-            .range([this.height - this.margin.bottom, this.margin.top])
-            // Round the top of the scale to the next tick value
-            .nice();
-
-        // Create axis generators
-        let bottomAxis = d3
-            .axisBottom(xScale)
-            // Remove the ticks from the bottom axis
-            // by setting the tick values to be an empty list.
-            .tickValues([]);
-        let leftAxis = d3
-            .axisLeft(yScale)
-            // Use a format specifier to render the numbers
-            // with the "k" and "M" shorthands
-            // like 200,000 as 200k and 1,000,000 as 1M.
-            .tickFormat(d3.format("~s"));
-        // Use the generators to draw the axes to the containers
-        this.bottomContainer.call(bottomAxis);
-        this.leftContainer.call(leftAxis);
-
-        ///////////////////////////
-        // Draw bars and infobox //
-        ///////////////////////////
-        this.svg
-            .selectAll("rect")
-            // Use `full_name` in the key function for unique identifiers
-            .data(filteredItems, d => d.full_name) // instead of `.data(items, d => d.full_name)`
-            .join("rect")
-            .attr("x", d => xScale(d.full_name))
-            .attr("y", d => yScale(d.stargazers_count))
-            .attr("fill", d => this.colorScale(getLicense(d)))
-            .attr("width", xScale.bandwidth())
-            // Each bar is drawn from its top-left corner,
-            // and that the heights are calculated
-            // such that the bottoms of all the bars align.
-            .attr("height", d => yScale(0) - yScale(d.stargazers_count))
-            // Add information into infobox
-            .on("mouseover", (e, d) => {
-                let info = d3.select("#info");
-                info.select(".repo .value a")
-                    .text(d.full_name)
-                    .attr("href", d.html_url);
-                info.select(".license .value")
-                    .text(getLicense(d));
-                info.select(".stars .value")
-                    .text(d.stargazers_count);
-            });
-    }
-
-    legend() {
-        // Add a legend for licenses with colors and checkboxes
-        d3.select("#legend-colors")
-                .selectAll("p")
-                .data(this.licenses)
-                .join(
-                    enter => {
-                        let p = enter.append("p");
-                        // Add checkboxes to filter licenses
-                        p.append("input")
-                            .attr("type", "checkbox")
-                            // Notice:
-                            // `.attr("checked", true)`
-                            // sets an *initial state* of a checkbox in the DOM.
-                            // After the checkbox is rendered, user interactions
-                            // modify the property, not the attribute.
-                            // Therefore we set the property.
-                            .property("checked", d => !hiddenLicenses.has(d))
-                            .attr("title", "Include in chart");
-                        // Add colored squares
-                        p.append("div")
-                            .attr("class", "color")
-                            .style("background-color", d => this.colorScale(d));
-                        // Add license names
-                        p.append("span")
-                            .text(d => d)
-                        return p;
-                    }
-                );
-
-        // Handle the checkbox change
-        d3.selectAll("#legend-colors input").on("change", (e, d) => {
-            // `d` is item of `licenses` because `input`
-            // is a child of `p` and is bound to the same data.
-            if (e.target.checked) {
-                hiddenLicenses.delete(d);
-            } else {
-                hiddenLicenses.add(d);
-            }
-            // console.log(hiddenLicenses);
-            // Call `update` itself if a checkbox is clicked
-            this.update();
+    ///////////////////////////
+    // Draw bars and infobox //
+    ///////////////////////////
+    svg
+        .selectAll("rect")
+        // Use `full_name` in the key function for unique identifiers
+        .data(filteredItems, d => d.full_name) // instead of `.data(items, d => d.full_name)`
+        .join(
+            enter => enter
+                .append("rect")
+                .attr("x", d => xScale(d.full_name))
+                .attr("y", d => yScale(d.stargazers_count))
+                .attr("fill", d => colorScale(getLicense(d)))
+                .attr("width", xScale.bandwidth())
+                // Each bar is drawn from its top-left corner,
+                // and that the heights are calculated
+                // such that the bottoms of all the bars align.
+                .attr("height", d => yScale(0) - yScale(d.stargazers_count))
+                // Start with the bars are 100 percent transparent
+                .style("opacity", 0)
+                .transition()
+                // Animate the bars up to 100 percent opaque
+                .style("opacity", 1),
+            update => update
+                .transition()
+                // Animate positions and sizes
+                .attr("x", d => xScale(d.full_name))
+                .attr("y", d => yScale(d.stargazers_count))
+                .attr("width", xScale.bandwidth())
+                .attr("height", d => yScale(0) - yScale(d.stargazers_count)),
+            exit => exit
+                .transition()
+                .style("opacity", 0)
+                .remove()
+        )
+        // Add information into infobox
+        .on("mouseover", (e, d) => {
+            let info = d3.select("#info");
+            info.select(".repo .value a")
+                .text(d.full_name)
+                .attr("href", d.html_url);
+            info.select(".license .value")
+                .text(getLicense(d));
+            info.select(".stars .value")
+                .text(d.stargazers_count);
         });
-    }
+
+    // Add a legend for licenses with colors and checkboxes
+    d3.select("#legend-colors")
+        .selectAll("p")
+        .data(licenses)
+        .join(
+            enter => {
+                let p = enter.append("p");
+                // Add checkboxes to filter licenses
+                p.append("input")
+                    .attr("type", "checkbox")
+                    // Notice:
+                    // `.attr("checked", true)`
+                    // sets an *initial state* of a checkbox in the DOM.
+                    // After the checkbox is rendered, user interactions
+                    // modify the property, not the attribute.
+                    // Therefore we set the property.
+                    .property("checked", d => !hiddenLicenses.has(d))
+                    .attr("title", "Include in chart")
+                    .on("change", (e, d) => {
+                        // Log the current state of the checkbox
+                        console.log(`Checkbox for license "${d}" is now:`, e.target.checked);
+                        if (e.target.checked) {
+                            hiddenLicenses.delete(d);
+                        } else {
+                            hiddenLicenses.add(d);
+                        }
+                        // console.log(hiddenLicenses);
+                        // Call `update` itself if a checkbox is clicked
+                        update(items);
+                    });
+                // Add colored squares
+                p.append("div")
+                    .attr("class", "color")
+                    .style("background-color", d => colorScale(d));
+                // Add license names
+                p.append("span")
+                    .text(d => d)
+                return p;
+            }
+        );
+
+/*
+    d3.selectAll("#legend-colors input").on("change", (e, d) => {
+        // `d` is item of `licenses` because `input`
+        // is a child of `p` and is bound to the same data.
+        if (e.target.checked) {
+            hiddenLicenses.delete(d); } else {
+            hiddenLicenses.add(d);
+        }
+        // console.log(hiddenLicenses);
+        // Call `update` itself if a checkbox is clicked
+        update(items);
+    });
+*/
+
 }
 
 function getUrl() {
@@ -225,6 +255,5 @@ d3.json(url).then(data => {
 */
 
 d3.json(url).then(data => {
-    let chart = new Chart(data.items);
-    chart.update();
-    chart.legend(); });
+    update(data.items);
+});
