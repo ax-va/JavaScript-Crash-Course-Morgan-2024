@@ -105,17 +105,17 @@ function update(items) {
         .selectAll("text")
         .style("text-anchor", "middle") // Center the text horizontally
         .each(function(d, i) {
-            // Get the current tick label's bounding box (its width and height)
+            // Get the current tick label's bounding box
             let bbox = this.getBBox();
-            let cx = bbox.x + bbox.width / 2; // Middle X of the text
-            let cy = bbox.y + bbox.height / 2; // Middle Y of the text (optional)
+            let cx = bbox.x + bbox.width / 2; // middle X of the text
+            let cy = bbox.y + bbox.height / 2; // middle Y of the text
 
             // Apply rotation around the middle point (cx, cy)
             d3.select(this)
                 .attr("transform", `translate(0, ${bbox.width / 2}) rotate(-90 ${cx} ${cy})`);
 
             if (tickValueHeight < bbox.width) {
-                tickValueHeight = bbox.width
+                tickValueHeight = bbox.width;
             }
         });
 
