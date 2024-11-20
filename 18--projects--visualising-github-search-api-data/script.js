@@ -4,6 +4,8 @@ This script is without OOP.
 
 const WIDTH = 600;
 const HEIGHT = 400;
+// This is to draw rotated tick text completely
+let tickValueHeight = 0;
 
 let margin = {top: 20, right: 10, bottom: 20, left: 50};
 
@@ -84,27 +86,53 @@ function update(items) {
         // Round the top of the scale to the next tick value
         .nice();
 
-    // Create axis generators
+        // Create axis generators
     let bottomAxis = d3
-        .axisBottom(xScale)
+        .axisBottom(xScale);
         // Remove the ticks from the bottom axis
         // by setting the tick values to be an empty list.
-        .tickValues([]);
+        // .tickValues([]);
     let leftAxis = d3
         .axisLeft(yScale)
         // Use a format specifier to render the numbers
         // with the "k" and "M" shorthands
         // like 200,000 as 200k and 1,000,000 as 1M.
         .tickFormat(d3.format("~s"));
+
     // Use the generators to draw the axes to the containers
-    bottomContainer.call(bottomAxis);
+    bottomContainer
+        .call(bottomAxis)
+        .selectAll("text")
+        .style("text-anchor", "middle") // Center the text horizontally
+        .each(function(d, i) {
+            // Get the current tick label's bounding box (its width and height)
+            let bbox = this.getBBox();
+            let cx = bbox.x + bbox.width / 2; // Middle X of the text
+            let cy = bbox.y + bbox.height / 2; // Middle Y of the text (optional)
+
+            // Apply rotation around the middle point (cx, cy)
+            d3.select(this)
+                .attr("transform", `translate(0, ${bbox.width / 2}) rotate(-90 ${cx} ${cy})`);
+
+            if (tickValueHeight < bbox.width) {
+                tickValueHeight = bbox.width
+            }
+        });
+
+    d3.selectAll(".tick line")  // This selects all the tick lines
+    .remove();  // Remove the tick lines
+
     leftContainer
         .transition()
         .call(leftAxis);
 
+    // Adjust the full height to draw rotated text completely
+    svg.attr("height", HEIGHT + tickValueHeight);
+
     ///////////////////////////
     // Draw bars and infobox //
     ///////////////////////////
+
     svg
         .selectAll("rect")
         // Use `full_name` in the key function for unique identifiers
