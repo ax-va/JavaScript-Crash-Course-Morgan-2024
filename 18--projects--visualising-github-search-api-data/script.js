@@ -126,7 +126,7 @@ function update(items) {
         .transition()
         .call(leftAxis);
 
-    // Adjust the full height to draw rotated text completely
+    // Adjust the full height to draw rotated tick text completely
     svg.attr("height", HEIGHT + tickValueHeight);
 
     ///////////////////////////
