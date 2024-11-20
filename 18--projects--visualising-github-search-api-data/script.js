@@ -4,8 +4,6 @@ This script is without OOP.
 
 const WIDTH = 600;
 const HEIGHT = 400;
-// This is to draw rotated tick text completely
-let tickValueHeight = 0;
 
 let margin = {top: 20, right: 10, bottom: 20, left: 50};
 
@@ -72,9 +70,10 @@ function update(items) {
         // (the eleventh and twelfth licenses will use the same colors as the first and second ones).
         .range(d3.schemeCategory10);
 
-    ///////////////
-    // Draw axis //
-    ///////////////
+    //////////////////////////
+    // Draw axis and labels //
+    //////////////////////////
+
     let xScale = d3.scaleBand()
         .domain(filteredItems.map(d => d.full_name)) // instead of `.domain(items.map(d => d.full_name))`
         .range([margin.left, WIDTH - margin.right])
@@ -99,25 +98,16 @@ function update(items) {
         // like 200,000 as 200k and 1,000,000 as 1M.
         .tickFormat(d3.format("~s"));
 
+
     // Use the generators to draw the axes to the containers
     bottomContainer
+        .transition()
         .call(bottomAxis)
         .selectAll("text")
-        .style("text-anchor", "middle") // Center the text horizontally
-        .each(function(d, i) {
-            // Get the current tick label's bounding box
-            let bbox = this.getBBox();
-            let cx = bbox.x + bbox.width / 2; // middle X of the text
-            let cy = bbox.y + bbox.height / 2; // middle Y of the text
-
-            // Apply rotation around the middle point (cx, cy)
-            d3.select(this)
-                .attr("transform", `translate(0, ${bbox.width / 2}) rotate(-90 ${cx} ${cy})`);
-
-            if (tickValueHeight < bbox.width) {
-                tickValueHeight = bbox.width;
-            }
-        });
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
 
     d3.selectAll(".tick line")  // This selects all the tick lines
     .remove();  // Remove the tick lines
@@ -126,8 +116,9 @@ function update(items) {
         .transition()
         .call(leftAxis);
 
-    // Adjust the full height to draw rotated tick text completely
-    svg.attr("height", HEIGHT + tickValueHeight);
+    // Draw rotated tick text completely
+    let tickLabelAreaHeight = d3.max(filteredItems, d => d.full_name.length) * 4;
+    svg.attr("height", HEIGHT + tickLabelAreaHeight);
 
     ///////////////////////////
     // Draw bars and infobox //
@@ -218,7 +209,7 @@ function update(items) {
             }
         );
 
-/*
+/* Alternatively
     d3.selectAll("#legend-colors input").on("change", (e, d) => {
         // `d` is item of `licenses` because `input`
         // is a child of `p` and is bound to the same data.
