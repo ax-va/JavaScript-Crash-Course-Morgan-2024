@@ -117,7 +117,7 @@ function update(items) {
         .call(leftAxis);
 
     // Draw rotated tick text completely
-    let tickLabelAreaHeight = d3.max(filteredItems, d => d.full_name.length) * 4;
+    let tickLabelAreaHeight = d3.max(filteredItems, d => d.full_name.length) * 5;
     svg.attr("height", HEIGHT + tickLabelAreaHeight);
 
     ///////////////////////////
