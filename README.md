@@ -5,7 +5,7 @@ This **JavaScript** programming crash course including an introduction to librar
 In addition to language syntax and code examples, the course is completed by the following projects:
 - the (Ping) Pong game without and with OOP
 - a song for Tanya
-- a visualization of the GitHub Search API 
+- a visualization of the GitHub Search API responses
 
 ## Original code by Nick Morgan
 https://codepen.io/collection/ZMjYLO
