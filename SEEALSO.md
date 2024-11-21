@@ -10,3 +10,18 @@ https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
 - D3.js
 https://d3js.org
+
+- Glitch to host frontend and backend code
+https://glitch.com/
+
+- HTML docs
+https://developer.mozilla.org/HTML
+
+- CSS docs
+https://developer.mozilla.org/CSS
+
+- JavaScript docs
+https://developer.mozilla.org/JavaScript
+
+- Jest testing library
+https://jestjs.io

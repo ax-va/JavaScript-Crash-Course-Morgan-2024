@@ -1,3 +1,8 @@
+/*
+Whereas JavaScript is *weakly typed*, Python is *strongly typed*,
+meaning that there are no implicit coercions.
+ */
+
 "Current value: " + 10;
 // 'Current value: 10'
 
