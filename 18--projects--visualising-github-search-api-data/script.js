@@ -1,7 +1,3 @@
-/*
-This script is without OOP.
- */
-
 const WIDTH = 600;
 const HEIGHT = 400;
 
@@ -121,9 +117,9 @@ function update(items) {
     let tickLabelAreaHeight = filteredItems.length ? d3.max(filteredItems, d => d.full_name.length) * 5 : 0;
     svg.attr("height", HEIGHT + tickLabelAreaHeight);
 
-    ///////////////////////////
-    // Draw bars and infobox //
-    ///////////////////////////
+    ////////////////////////////////
+    // Draw barchart and sidebars //
+    ////////////////////////////////
 
     svg
         .selectAll("rect")
