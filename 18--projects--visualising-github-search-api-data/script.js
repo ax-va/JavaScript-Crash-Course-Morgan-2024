@@ -232,7 +232,7 @@ to a properly formatted and encoded URL.
  */
     let baseUrl = "https://api.github.com/search/repositories";
     let params = {
-        q: "language:rust stars:>25000",
+        q: "language:javascript stars:>25000",
         per_page: 20,
         sort: "stars"
     };
