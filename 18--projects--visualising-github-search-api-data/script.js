@@ -185,7 +185,7 @@ function update(items) {
                     .attr("title", "Include in chart")
                     .on("change", (e, d) => {
                         // Log the current state of the checkbox
-                        console.log(`Checkbox for license "${d}" is now:`, e.target.checked);
+                        // console.log(`Checkbox for license "${d}" is now:`, e.target.checked);
                         if (e.target.checked) {
                             hiddenLicenses.delete(d);
                         } else {
