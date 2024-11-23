@@ -115,7 +115,9 @@ function update(items) {
     // To draw rotated tick text completely.
     // Avoid `NaN` if `filteredItems` is empty.
     let tickLabelAreaHeight = filteredItems.length ? d3.max(filteredItems, d => d.full_name.length) * 5 : 0;
-    svg.attr("height", HEIGHT + tickLabelAreaHeight);
+    svg
+        .transition()
+        .attr("height", HEIGHT + tickLabelAreaHeight);
 
     ////////////////////////////////
     // Draw barchart and sidebars //
