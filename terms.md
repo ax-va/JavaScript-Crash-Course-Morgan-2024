@@ -7,6 +7,11 @@ through a technique called *data binding* so that each individual piece of the d
 called a *datum*, is bound to an individual element on the page (usually an SVG element).
 Changing the data results in changing the elements as well.
 
+**ECMAScript**
+
+JavaScript is standardized as ECMAScript by the *Ecma International* standards organization.
+Within Ecma International, the *Technical Committee 39* (TC39) is responsible for developing the JavaScript language.
+
 **Event bubbling = triggering an event on an element causes triggering the event on all its ancestors**
 
 When an event is triggered on an element, 
