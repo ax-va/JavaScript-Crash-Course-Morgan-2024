@@ -5,7 +5,7 @@ This **JavaScript** programming crash course with an introduction to libraries *
 In addition to language syntax and code examples, the course is completed by the following projects:
 - [a game created (without and) with OOP](https://vizhub.com/ax-va/966f246e8d2b45ccaf84a5adccafda33)
 - [a nice song for nice Tanya](https://vizhub.com/ax-va/c5bf2c12ce1a494ea7b8bc249a62357d)
-- [a visualization of data fetched via the GitHub Search API](https://vizhub.com/ax-va/0865b6bcbd4345d693c9569e3d3b800f)
+- [a visualization of data fetched via the GitHub Search API](https://vizhub.com/ax-va/0865b6bcbd4345d693c9569e3d3b800f?mode=embed)
 
 ## Original code by Nick Morgan
 https://codepen.io/collection/ZMjYLO
